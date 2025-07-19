@@ -135,7 +135,7 @@ const faqs = [
         question: "How do I contact customer support?",
         answer: (
             <p>
-                Use the <Link href="/contact" className="text-primary underline hover:text-primary/80">contact form</gLink>, we promise we will treat your request as an urgent matter.
+                Use the <Link href="/contact" className="text-primary underline hover:text-primary/80">contact form</Link>, we promise we will treat your request as an urgent matter.
             </p>
         ),
     },
