@@ -1,4 +1,5 @@
 
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { useGalleryStore } from '@/lib/gallery-store';
 
 const features = [
   {
@@ -25,46 +27,14 @@ const features = [
   },
 ];
 
-const galleryImages = [
-    {
-        src: "https://images.pexels.com/photos/54340/sun-rose-teanature-flower-54340.jpeg",
-        alt: "A golden sunrise over young plants seen through a protective net.",
-        aiHint: "farm sunrise"
-    },
-    {
-        src: "https://images.pexels.com/photos/265076/pexels-photo-265076.jpeg",
-        alt: "A close-up of water droplets on vibrant green leaves.",
-        aiHint: "fresh leaves"
-    },
-    {
-        src: "https://images.pexels.com/photos/4197483/pexels-photo-4197483.jpeg",
-        alt: "A farmer holding a wooden crate filled with fresh, colorful vegetables.",
-        aiHint: "farmer holding vegetables"
-    },
-    {
-        src: "https://images.pexels.com/photos/161963/chilis-pepperoni-peppers-spicy-161963.jpeg",
-        alt: "A person's hand picking a fresh red chili from a woven basket on the grass.",
-        aiHint: "chili basket"
-    },
-    {
-        src: "https://images.pexels.com/photos/235656/pexels-photo-235656.jpeg",
-        alt: "Rows of lush green lettuce growing in a field.",
-        aiHint: "lettuce field"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1594056501292-c419c968846f",
-        alt: "Hands gently holding a freshly opened pomegranate, revealing its vibrant red seeds.",
-        aiHint: "pomegranate hands"
-    }
-]
-
-
 export default function Home() {
+  const { images: galleryImages } = useGalleryStore();
+
   return (
     <>
       <section className="w-full py-20 md:py-32 flex items-center justify-center text-center">
         <div className="container px-4">
-            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl text-primary">
+            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl">
             Fresh, Local, Delivered.
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
