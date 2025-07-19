@@ -42,6 +42,11 @@ const galleryImages = [
         aiHint: "farmer holding vegetables"
     },
     {
+        src: "https://images.pexels.com/photos/161963/chilis-pepperoni-peppers-spicy-161963.jpeg",
+        alt: "A person's hand picking a fresh red chili from a woven basket on the grass.",
+        aiHint: "chili basket"
+    },
+    {
         src: "https://images.pexels.com/photos/235656/pexels-photo-235656.jpeg",
         alt: "Rows of lush green lettuce growing in a field.",
         aiHint: "lettuce field"
