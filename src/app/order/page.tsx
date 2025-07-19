@@ -9,6 +9,7 @@ export default function OrderPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           You're just a few steps away from delicious, farm-fresh vegetables.
+          <span className="block font-semibold mt-2">Please note: Delivery is currently only available in Bulawayo.</span>
         </p>
       </div>
       <OrderForm />

@@ -16,8 +16,8 @@ import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const boxOptions = [
-  { id: 'essentials', name: 'Essentials Box', price: 250 },
-  { id: 'family', name: 'Family Value Box', price: 450 },
+  { id: 'essentials', name: 'Essentials Box', price: 25 },
+  { id: 'family', name: 'Family Value Box', price: 45 },
 ];
 
 const formSchema = z.object({
@@ -85,8 +85,8 @@ export default function OrderForm() {
         if (boxSelection && quantity) {
             const selectedBox = boxOptions.find(box => box.id === boxSelection);
             if (selectedBox) {
-                // Total cost is for twice per month delivery
-                const cost = selectedBox.price * quantity * 2;
+                // Total cost is for a one month subscription (twice per month delivery)
+                const cost = selectedBox.price * quantity;
                 setTotalCost(cost);
             }
         } else {
@@ -174,7 +174,7 @@ export default function OrderForm() {
                                                 field.value === option.id && "border-primary"
                                             )}>
                                                 <span className="font-bold text-xl">{option.name}</span>
-                                                <span className="text-lg">R{option.price}</span>
+                                                <span className="text-lg">${option.price}</span>
                                             </FormLabel>
                                         </FormItem>
                                         ))}
@@ -185,7 +185,7 @@ export default function OrderForm() {
                             <FormField control={form.control} name="quantity" render={({ field }) => (
                                 <FormItem><FormLabel className="text-lg font-headline">2. Select Quantity</FormLabel>
                                 <FormControl><QuantityInput value={field.value} onChange={field.onChange} /></FormControl>
-                                <FormDescription>How many boxes you'd like per delivery.</FormDescription><FormMessage /></FormItem>
+                                <FormDescription>How many box subscriptions you'd like.</FormDescription><FormMessage /></FormItem>
                             )} />
 
                              <FormField control={form.control} name="paymentMethod" render={({ field }) => (
@@ -206,8 +206,8 @@ export default function OrderForm() {
 
                             <div className="text-center bg-muted/50 rounded-lg p-6 space-y-2">
                                 <p className="text-lg font-headline">Total Monthly Cost</p>
-                                <p className="text-4xl font-extrabold text-primary">R{totalCost.toFixed(2)}</p>
-                                <p className="text-xs text-muted-foreground">Includes two deliveries per month. You can cancel anytime.</p>
+                                <p className="text-4xl font-extrabold text-primary">${totalCost.toFixed(2)}</p>
+                                <p className="text-xs text-muted-foreground">1-month subscription, includes two deliveries. You can cancel anytime.</p>
                             </div>
 
                             <Button type="submit" size="lg" className="w-full text-lg font-bold bg-accent hover:bg-accent/90">Complete Order</Button>

@@ -9,14 +9,14 @@ const boxOptions = [
   {
     id: 'essentials',
     name: 'Essentials Box',
-    price: '250',
+    price: '25',
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />
   },
   {
     id: 'family',
     name: 'Family Value Box',
-    price: '450',
+    price: '45',
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />
   },
@@ -31,7 +31,7 @@ async function BoxCard({ box }: { box: typeof boxOptions[0] }) {
         {box.icon}
         <div>
           <CardTitle className="text-2xl font-bold font-headline">{box.name}</CardTitle>
-          <CardDescription>Starting from R{box.price} per box</CardDescription>
+          <CardDescription>Starting from ${box.price} per month</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-between p-6 pt-0">
@@ -70,6 +70,7 @@ export default function BoxesPage() {
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
           Choose the perfect box of seasonal vegetables, straight from our farm to your table.
+          <span className="block font-semibold mt-2">Please note: Delivery is currently only available in Bulawayo.</span>
         </p>
       </section>
 

@@ -84,14 +84,15 @@ const OrderConfirmationDialog: FC<OrderConfirmationDialogProps> = ({ isOpen, onO
             </div>
             <div className="flex justify-between items-center text-xl font-bold pt-2 border-t mt-2">
               <span className="text-primary">Monthly Total:</span>
-              <span>R{orderDetails.totalCost.toFixed(2)}</span>
+              <span>${orderDetails.totalCost.toFixed(2)}</span>
             </div>
-             <p className="text-xs text-muted-foreground pt-1">Total cost is for two deliveries per month.</p>
+             <p className="text-xs text-muted-foreground pt-1">Total cost is for a 1-month subscription (two deliveries).</p>
           </div>
           <div className="space-y-2">
             <h3 className="font-semibold text-lg font-headline">Delivery Details</h3>
             <p className="text-muted-foreground text-sm">Your veggie boxes will be delivered to:</p>
             <p className="font-medium text-sm">{orderDetails.address}, {orderDetails.suburb}</p>
+            <p className="text-muted-foreground text-sm font-semibold">Delivery is only available in Bulawayo.</p>
             <p className="text-muted-foreground mt-2 text-sm">Your upcoming delivery dates are:</p>
             {deliveryDates && (
               <ul className="list-disc list-inside space-y-1 font-medium text-primary text-sm">
