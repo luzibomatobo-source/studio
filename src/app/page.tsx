@@ -31,9 +31,9 @@ export default function Home() {
       <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
            <Image
-                src="https://images.pexels.com/photos/128402/pexels-photo-128402.jpeg"
+                src="https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg"
                 data-ai-hint="vegetables harvest"
-                alt="A beautiful harvest of fresh vegetables including carrots, broccoli, and peppers."
+                alt="A close-up of fresh vegetables including radishes, carrots, and leafy greens."
                 fill
                 className="object-cover"
             />
