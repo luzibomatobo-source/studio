@@ -14,7 +14,7 @@ const boxOptions = [
     price: '8',
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />,
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://images.unsplash.com/photo-1690934164598-99267828e900?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxiYXNrZXQlMjBvZiUyMHZlZ2dpZXN8ZW58MHx8fHwxNzUyOTY2NjAxfDA&ixlib=rb-4.1.0&q=80&w=1080',
     aiHint: 'fresh produce'
   },
   {
