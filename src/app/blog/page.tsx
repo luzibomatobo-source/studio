@@ -16,8 +16,8 @@ export default function BlogPage() {
         <div className="relative w-full aspect-[4/3] mb-8 rounded-lg overflow-hidden shadow-lg">
             <Image
                 src="https://placehold.co/800x600.png"
-                data-ai-hint="pomegranate hands"
-                alt="A person's hands holding a fresh, open pomegranate, showcasing the vibrant red seeds."
+                data-ai-hint="chili basket"
+                alt="A person's hand picking a fresh red chili from a woven basket on the grass."
                 fill
                 className="object-cover"
             />
