@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +15,7 @@ import { QuantityInput } from "@/components/quantity-input";
 import OrderConfirmationDialog from "@/components/order-confirmation-dialog";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 
 const boxOptions = [
   { id: 'essentials', name: 'Essentials Box', price: 8 },
@@ -27,6 +29,7 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   address: z.string().min(5, "Please enter a valid street address."),
   suburb: z.string().min(2, "Please enter a valid suburb."),
+  deliveryNotes: z.string().optional(),
   boxSelection: z.enum(["essentials", "family"], { required_error: "You need to select a box type." }),
   quantity: z.coerce.number().min(1).max(10, "Maximum of 10 boxes per order."),
   paymentMethod: z.enum(["card", "cash"], { required_error: "You need to select a payment method." }),
@@ -65,6 +68,7 @@ export default function OrderForm() {
             email: "",
             address: "",
             suburb: "",
+            deliveryNotes: "",
             boxSelection: preselectedBox === 'family' ? 'family' : (preselectedBox === 'essentials' ? 'essentials' : undefined),
             quantity: 1,
             paymentMethod: undefined,
@@ -158,6 +162,26 @@ export default function OrderForm() {
                                 <FormField control={form.control} name="suburb" render={({ field }) => (
                                     <FormItem className="md:col-span-2"><FormLabel>Suburb</FormLabel><FormControl><Input placeholder="e.g., Parkhurst" {...field} /></FormControl><FormMessage /></FormItem>
                                 )} />
+                                 <FormField
+                                    control={form.control}
+                                    name="deliveryNotes"
+                                    render={({ field }) => (
+                                        <FormItem className="md:col-span-2">
+                                        <FormLabel>Delivery Notes (Optional)</FormLabel>
+                                        <FormControl>
+                                            <Textarea
+                                            placeholder="e.g., Leave with reception, call upon arrival..."
+                                            className="resize-none"
+                                            {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Add any special instructions for the delivery driver.
+                                        </FormDescription>
+                                        <FormMessage />
+                                        </FormItem>
+                                    )}
+                                    />
                             </div>
 
                             <FormField control={form.control} name="boxSelection" render={({ field }) => (

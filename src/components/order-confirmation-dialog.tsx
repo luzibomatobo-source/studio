@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, type FC } from 'react';
@@ -108,6 +109,12 @@ const OrderConfirmationDialog: FC<OrderConfirmationDialogProps> = ({ isOpen, onO
             <h3 className="font-semibold text-lg font-headline">Delivery Details</h3>
             <p className="text-muted-foreground text-sm">Your veggie boxes will be delivered to:</p>
             <p className="font-medium text-sm">{orderDetails.address}, {orderDetails.suburb}</p>
+            {orderDetails.deliveryNotes && (
+              <div className="text-sm">
+                <p className="text-muted-foreground font-semibold">Delivery Notes:</p>
+                <p className="font-medium italic">"{orderDetails.deliveryNotes}"</p>
+              </div>
+            )}
             <p className="text-muted-foreground text-sm font-semibold">Delivery is only available in Bulawayo.</p>
             <p className="text-muted-foreground mt-2 text-sm">Your upcoming delivery dates are:</p>
             {deliveryDates && (
