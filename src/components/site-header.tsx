@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Package } from 'lucide-react';
 import { Button } from './ui/button';
+import { ThemeToggle } from './theme-toggle';
 
 const Logo = () => (
     <svg
@@ -28,7 +29,7 @@ export default function SiteHeader() {
           <Logo />
           <span className="font-bold inline-block font-headline">Shepherd Header</span>
         </Link>
-        <nav className="flex items-center space-x-4">
+        <nav className="flex items-center space-x-4 flex-1">
           <Button variant="ghost" asChild>
             <Link href="/boxes">
               <Package className="mr-2 h-4 w-4" />
@@ -36,6 +37,7 @@ export default function SiteHeader() {
             </Link>
           </Button>
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   );

@@ -16,8 +16,8 @@ import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const boxOptions = [
-  { id: 'essentials', name: 'Essentials Box', price: 25 },
-  { id: 'family', name: 'Family Value Box', price: 45 },
+  { id: 'essentials', name: 'Essentials Box', price: 8 },
+  { id: 'family', name: 'Family Value Box', price: 15 },
 ];
 
 const formSchema = z.object({
@@ -86,7 +86,7 @@ export default function OrderForm() {
             const selectedBox = boxOptions.find(box => box.id === boxSelection);
             if (selectedBox) {
                 // Total cost is for a one month subscription (twice per month delivery)
-                const cost = selectedBox.price * quantity;
+                const cost = selectedBox.price * quantity * 2;
                 setTotalCost(cost);
             }
         } else {
@@ -174,7 +174,7 @@ export default function OrderForm() {
                                                 field.value === option.id && "border-primary"
                                             )}>
                                                 <span className="font-bold text-xl">{option.name}</span>
-                                                <span className="text-lg">${option.price}</span>
+                                                <span className="text-lg">${option.price} / box</span>
                                             </FormLabel>
                                         </FormItem>
                                         ))}

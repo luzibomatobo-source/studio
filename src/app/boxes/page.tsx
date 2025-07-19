@@ -9,14 +9,14 @@ const boxOptions = [
   {
     id: 'essentials',
     name: 'Essentials Box',
-    price: '25',
+    price: '8',
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />
   },
   {
     id: 'family',
     name: 'Family Value Box',
-    price: '45',
+    price: '15',
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />
   },
