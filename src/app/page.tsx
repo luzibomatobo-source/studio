@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -45,6 +46,19 @@ export default function Home() {
               See Our Boxes
             </Link>
           </Button>
+        </div>
+      </section>
+
+      <section className="mt-20">
+        <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden shadow-lg">
+            <Image
+                src="https://placehold.co/1200x400.png"
+                data-ai-hint="fresh vegetables"
+                alt="A vibrant arrangement of fresh vegetables on a rustic wooden table."
+                fill
+                className="object-cover"
+                priority
+            />
         </div>
       </section>
       

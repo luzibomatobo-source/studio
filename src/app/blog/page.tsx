@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ export default function BlogPage() {
         <div className="relative w-full aspect-[4/3] mb-8 rounded-lg overflow-hidden shadow-lg">
             <Image
                 src="https://placehold.co/800x600.png"
-                data-ai-hint="woman holding vegetables"
+                data-ai-hint="woman vegetables"
                 alt="A woman smiling while holding a box of fresh vegetables in a field."
                 fill
                 className="object-cover"

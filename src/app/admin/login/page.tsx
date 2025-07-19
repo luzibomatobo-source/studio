@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
 import { Package } from 'lucide-react';
+import Image from 'next/image';
 
 const SUPER_USER_EMAIL = 'admin@shepherdheader.co.za';
 
@@ -58,7 +59,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
        <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
             <div className="grid gap-2 text-center">
@@ -121,10 +122,19 @@ export default function AdminLoginPage() {
             </form>
         </div>
       </div>
-       <div className="hidden bg-muted lg:flex items-center justify-center flex-col p-8 text-center">
-            <Package className="h-24 w-24 text-primary" />
-            <h2 className="mt-6 text-3xl font-bold">Shepherd Header Admin</h2>
-            <p className="text-muted-foreground mt-2">Manage orders, customers, and deliveries with ease.</p>
+       <div className="hidden bg-muted lg:block relative">
+            <Image
+                src="https://placehold.co/1080x1920.png"
+                data-ai-hint="vegetable box"
+                alt="A beautiful box of fresh vegetables."
+                fill
+                className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 text-white">
+                <h2 className="mt-6 text-4xl font-bold">Shepherd Header Admin</h2>
+                <p className="text-lg mt-2">Manage orders, customers, and deliveries with ease.</p>
+            </div>
        </div>
     </div>
   );
