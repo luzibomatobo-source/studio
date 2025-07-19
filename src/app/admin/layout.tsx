@@ -7,7 +7,6 @@ import {
   FileText,
   Home,
   Package,
-  PanelLeft,
   Settings,
   Users2,
 } from "lucide-react"
@@ -19,9 +18,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
@@ -44,6 +40,11 @@ export default function AdminLayout({
   const isActive = (path: string) => {
     return pathname === path;
   }
+  
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
 
   return (
     <SidebarProvider>
@@ -54,8 +55,8 @@ export default function AdminLayout({
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Dashboard" isActive={isActive('/admin/dashboard')}>
-                <Link href="/admin/dashboard">
+              <SidebarMenuButton asChild tooltip="Dashboard" isActive={isActive('/admin')}>
+                <Link href="/admin">
                   <Home />
                   <span>Dashboard</span>
                 </Link>

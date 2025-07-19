@@ -46,7 +46,7 @@ export default function SiteHeader() {
         </nav>
         <div className="flex items-center space-x-2">
             <Button variant="ghost" asChild>
-                <Link href="/admin">
+                <Link href="/admin/login">
                     <LogIn className="mr-2 h-4 w-4" />
                     Staff Login
                 </Link>
