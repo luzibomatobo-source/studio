@@ -31,9 +31,9 @@ export default function Home() {
       <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
            <Image
-                src="https://placehold.co/1200x514.png"
+                src="/placeholder.co/1200x514.png"
                 data-ai-hint="farm sunrise"
-                alt="A beautiful sunrise over a freshly tilled and irrigated farm field."
+                alt="A golden sunrise over young plants seen through a protective net."
                 fill
                 className="object-cover"
                 priority
