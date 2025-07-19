@@ -124,9 +124,9 @@ export default function AdminLoginPage() {
       </div>
        <div className="hidden bg-muted lg:block relative">
             <Image
-                src="https://placehold.co/1080x1920.png"
+                src="https://images.pexels.com/photos/1458916/pexels-photo-1458916.jpeg"
                 data-ai-hint="veggie box"
-                alt="A beautiful box of fresh vegetables."
+                alt="A vibrant assortment of fresh vegetables."
                 fill
                 className="object-cover"
             />
