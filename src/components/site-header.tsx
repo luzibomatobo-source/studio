@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Package, Newspaper, LogIn } from 'lucide-react';
 import { Button } from './ui/button';
 import { ThemeToggle } from './theme-toggle';
+import NextDeliveryBanner from './next-delivery-banner';
 
 const Logo = () => (
     <svg
@@ -24,6 +25,7 @@ const Logo = () => (
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <NextDeliveryBanner />
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <Link href="/" className="flex items-center space-x-2 mr-6">
           <Logo />
