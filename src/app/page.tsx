@@ -28,22 +28,12 @@ const features = [
 export default function Home() {
   return (
     <>
-      <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
-        <div className="absolute inset-0 z-0">
-           <Image
-                src="https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg"
-                data-ai-hint="vegetables harvest"
-                alt="A close-up of fresh vegetables including radishes, carrots, and leafy greens."
-                fill
-                className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/50" />
-        </div>
-        <div className="container relative z-10 px-4">
-            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl">
+      <section className="w-full py-20 md:py-32 flex items-center justify-center text-center">
+        <div className="container px-4">
+            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl text-primary">
             Fresh, Local, Delivered.
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-white/90 sm:text-xl">
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
             Discover the best seasonal vegetables, straight from our farm to your table. Healthy eating has never been easier or more delicious.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -52,7 +42,7 @@ export default function Home() {
                 Order Your Box Now <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="font-bold text-lg bg-transparent border-white text-white hover:bg-white/10 w-full sm:w-auto">
+            <Button asChild size="lg" variant="outline" className="font-bold text-lg w-full sm:w-auto">
                 <Link href="/boxes">
                 See Our Boxes
                 </Link>
