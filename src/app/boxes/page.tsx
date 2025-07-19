@@ -30,14 +30,6 @@ const boxOptions = [
 ];
 
 function BoxCard({ box }: { box: typeof boxOptions[0] }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(box.imageUrl);
-
-  useEffect(() => {
-    // Forcing placeholder for now as generation is too slow
-    setImageUrl(box.imageUrl);
-  }, [box.imageUrl]);
-  
-
   return (
     <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       <CardHeader className="flex-row items-center gap-4 p-6">
@@ -48,20 +40,14 @@ function BoxCard({ box }: { box: typeof boxOptions[0] }) {
         </div>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-between p-6 pt-0">
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
+        <Image
+            src={box.imageUrl}
             alt={box.name}
             data-ai-hint={box.aiHint || 'veggie box'}
             width={600}
             height={400}
             className="rounded-lg object-cover w-full aspect-video mb-4"
-          />
-        ) : (
-          <div className="rounded-lg bg-muted w-full aspect-video mb-4 flex items-center justify-center">
-            <p className="text-muted-foreground">Loading image...</p>
-          </div>
-        )}
+        />
         <p className="text-muted-foreground">{box.description}</p>
       </CardContent>
       <CardFooter className="p-6 pt-0">
