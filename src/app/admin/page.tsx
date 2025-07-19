@@ -2,13 +2,13 @@
 "use client"
 
 import {
-  Area,
+  ResponsiveContainer,
   AreaChart,
-  Bar,
+  Area,
   BarChart,
+  Bar,
   CartesianGrid,
   Legend,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
