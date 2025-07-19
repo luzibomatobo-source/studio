@@ -149,9 +149,9 @@ export default function FAQPage() {
         <header className="relative w-full h-[40vh] flex items-center justify-center text-center text-white overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://placehold.co/1200x514.png"
-                    data-ai-hint="farm sunset"
-                    alt="A beautiful sunset over a farm field with irrigation lines."
+                    src="/placeholder.co/1200x514.png"
+                    data-ai-hint="farm sunrise"
+                    alt="A golden sunrise over young plants seen through a protective net."
                     fill
                     className="object-cover"
                 />
