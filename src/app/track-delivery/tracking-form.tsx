@@ -9,7 +9,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { CheckCircle, Truck, Package, XCircle } from "lucide-react";
+import { CheckCircle, Truck, Package, XCircle, PauseCircle } from "lucide-react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number."),
@@ -44,6 +46,7 @@ const statusInfo = {
 export default function TrackingForm() {
     const [status, setStatus] = useState<DeliveryStatus | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const { toast } = useToast();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -56,20 +59,23 @@ export default function TrackingForm() {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsLoading(true);
         setStatus(null);
-        // Simulate an API call to a backend
         await new Promise(resolve => setTimeout(resolve, 1500));
         
-        // --- Mock Logic ---
-        // In a real app, you would make an API call here to your backend
-        // to fetch the real delivery status.
-        // For now, we'll return a random status to simulate the functionality.
         const mockStatuses: DeliveryStatus[] = ['confirmed', 'out_for_delivery', 'delivered', 'not_found'];
         const randomStatus = mockStatuses[Math.floor(Math.random() * mockStatuses.length)];
         setStatus(randomStatus);
-        // --- End Mock Logic ---
 
         setIsLoading(false);
     };
+
+    const handlePauseDelivery = async () => {
+        // Simulate API call to pause delivery
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        toast({
+            title: "Delivery Paused",
+            description: "Your next delivery has been successfully paused. We'll resume on the next cycle.",
+        });
+    }
 
     return (
         <Card className="shadow-lg">
@@ -123,13 +129,35 @@ export default function TrackingForm() {
             {status && (
                  <CardContent>
                     <Alert>
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-start gap-4">
                            {statusInfo[status].icon}
-                            <div>
+                            <div className='flex-1'>
                                 <AlertTitle className="text-lg font-bold">{statusInfo[status].title}</AlertTitle>
                                 <AlertDescription>
                                     {statusInfo[status].description}
                                 </AlertDescription>
+                                {status !== 'not_found' && (
+                                    <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                            <Button variant="outline" size="sm" className="mt-4">
+                                                <PauseCircle className="mr-2 h-4 w-4" />
+                                                Pause Next Delivery
+                                            </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                                <AlertDialogTitle>Are you sure you want to pause?</AlertDialogTitle>
+                                                <AlertDialogDescription>
+                                                    This will skip your next scheduled delivery. Your subscription will resume automatically on the following delivery date.
+                                                </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                <AlertDialogAction onClick={handlePauseDelivery}>Confirm Pause</AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
+                                )}
                             </div>
                         </div>
                     </Alert>
