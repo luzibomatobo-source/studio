@@ -45,6 +45,11 @@ const galleryImages = [
         src: "https://images.pexels.com/photos/235656/pexels-photo-235656.jpeg",
         alt: "Rows of lush green lettuce growing in a field.",
         aiHint: "lettuce field"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1594056501292-c419c968846f",
+        alt: "Hands gently holding a freshly opened pomegranate, revealing its vibrant red seeds.",
+        aiHint: "pomegranate hands"
     }
 ]
 
