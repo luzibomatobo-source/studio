@@ -28,10 +28,15 @@ export default function Home() {
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
           Discover the best seasonal vegetables, straight from our farm to your table. Healthy eating has never been easier or more delicious.
         </p>
-        <div className="mt-8">
-          <Button asChild size="lg" className="font-bold text-lg bg-accent hover:bg-accent/90">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button asChild size="lg" className="font-bold text-lg w-full sm:w-auto">
+            <Link href="/order">
+              Order Your Box Now <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="font-bold text-lg bg-transparent w-full sm:w-auto">
             <Link href="/boxes">
-              See Our Boxes <ArrowRight className="ml-2 h-5 w-5" />
+              See Our Boxes
             </Link>
           </Button>
         </div>
@@ -52,20 +57,6 @@ export default function Home() {
              </Card>
            ))}
          </div>
-      </section>
-
-      <section className="mt-20 text-center bg-primary/10 p-8 rounded-lg">
-          <h2 className="text-3xl font-bold font-headline text-primary">Ready to Taste the Difference?</h2>
-           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
-            Our veggie boxes are packed with flavor and nutrients. Find the perfect one for you and your family.
-           </p>
-           <div className="mt-8">
-             <Button asChild size="lg" className="font-bold text-lg">
-               <Link href="/order">
-                 Order Your Box Now <ArrowRight className="ml-2 h-5 w-5" />
-               </Link>
-             </Button>
-           </div>
       </section>
     </div>
   );
