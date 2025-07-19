@@ -40,9 +40,9 @@ export default function NextDeliveryBanner() {
     }
 
     return (
-        <div className="bg-primary text-primary-foreground text-center text-sm p-2 flex items-center justify-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <span>Next Delivery Date: <strong>{nextDeliveryDate}</strong></span>
+        <div className="bg-primary text-primary-foreground text-center text-base font-bold p-3 flex items-center justify-center gap-2">
+            <Calendar className="h-5 w-5" />
+            <span>Next Delivery Date: <span className="font-extrabold underline">{nextDeliveryDate}</span></span>
         </div>
     );
 }
