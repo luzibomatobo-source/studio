@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import SiteHeader from '@/components/site-header';
 import { ThemeProvider } from '@/components/theme-provider';
+import SiteFooter from '@/components/site-footer';
 
 export const metadata: Metadata = {
   title: 'Shepherd Header Veggie Box',
@@ -35,6 +36,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <SiteHeader />
             <main className="flex-grow">{children}</main>
+            <SiteFooter />
           </div>
           <Toaster />
         </ThemeProvider>

@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Package, Newspaper, LogIn, HelpCircle, Contact, Leaf } from 'lucide-react';
+import { Package, Newspaper, HelpCircle, Contact, Leaf } from 'lucide-react';
 import { Button } from './ui/button';
 import { ThemeToggle } from './theme-toggle';
 import NextDeliveryBanner from './next-delivery-banner';
@@ -45,12 +45,6 @@ export default function SiteHeader() {
           </Button>
         </nav>
         <div className="flex items-center space-x-2">
-            <Button variant="ghost" asChild>
-                <Link href="/admin/login">
-                    <LogIn className="mr-2 h-4 w-4" />
-                    Staff Login
-                </Link>
-            </Button>
             <ThemeToggle />
         </div>
       </div>
