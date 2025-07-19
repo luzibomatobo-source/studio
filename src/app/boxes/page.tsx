@@ -15,31 +15,40 @@ const boxOptions = [
     name: 'Essentials Box',
     price: '8',
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
-    icon: <ShoppingBasket className="h-8 w-8 text-primary" />
+    icon: <ShoppingBasket className="h-8 w-8 text-primary" />,
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'farm sunset'
   },
   {
     id: 'family',
     name: 'Family Value Box',
     price: '15',
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
-    icon: <Carrot className="h-8 w-8 text-primary" />
+    icon: <Carrot className="h-8 w-8 text-primary" />,
+    imageUrl: null,
+    aiHint: null
   },
 ];
 
 function BoxCard({ box }: { box: typeof boxOptions[0] }) {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(box.imageUrl);
 
   useEffect(() => {
     async function generateImage() {
-        try {
-            const result = await generateBoxImage({ boxName: box.name, description: box.description });
-            setImageUrl(result.imageUrl);
-        } catch (error) {
-            console.error("Failed to generate image:", error);
+        // Only generate image if one isn't provided
+        if (!box.imageUrl) {
+            try {
+                const result = await generateBoxImage({ boxName: box.name, description: box.description });
+                setImageUrl(result.imageUrl);
+            } catch (error) {
+                console.error("Failed to generate image:", error);
+                // Fallback to a placeholder if generation fails
+                setImageUrl('https://placehold.co/600x400.png');
+            }
         }
     }
     generateImage();
-  }, [box.name, box.description]);
+  }, [box.imageUrl, box.name, box.description]);
   
 
   return (
@@ -56,6 +65,7 @@ function BoxCard({ box }: { box: typeof boxOptions[0] }) {
           <Image
             src={imageUrl}
             alt={box.name}
+            data-ai-hint={box.aiHint || 'veggie box'}
             width={600}
             height={400}
             className="rounded-lg object-cover w-full aspect-video mb-4"
