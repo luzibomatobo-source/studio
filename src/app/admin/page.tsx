@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -7,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
+import { Package } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
@@ -40,46 +42,56 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-150px)] bg-gray-100 dark:bg-gray-900">
-      <form onSubmit={handleLogin} className="w-full max-w-md mx-4">
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold font-headline text-primary">Staff Login</CardTitle>
-            <CardDescription>Enter your credentials to access the dashboard.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="info@shepherdheader.co.za" 
-                required 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+       <div className="flex items-center justify-center py-12">
+        <div className="mx-auto grid w-[350px] gap-6">
+            <div className="grid gap-2 text-center">
+                 <h1 className="text-3xl font-bold">Login</h1>
+                 <p className="text-balance text-muted-foreground">
+                    Enter your email below to login to your account
+                </p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input 
-                id="password" 
-                type="password" 
-                required 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col">
-            <Button type="submit" className="w-full font-bold" disabled={isLoading}>
-              {isLoading ? 'Signing In...' : 'Sign In'}
-            </Button>
-            <p className="mt-4 text-xs text-center text-muted-foreground">
-              Use password: <code className="font-mono bg-muted p-1 rounded-sm">password123</code>
-            </p>
-          </CardFooter>
-        </Card>
-      </form>
+            <form onSubmit={handleLogin} className="grid gap-4">
+                 <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="info@shepherdheader.co.za"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                 </div>
+                 <div className="grid gap-2">
+                     <div className="flex items-center">
+                        <Label htmlFor="password">Password</Label>
+                        <a href="#" className="ml-auto inline-block text-sm underline">
+                            Forgot your password?
+                        </a>
+                     </div>
+                     <Input 
+                        id="password" 
+                        type="password" 
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                    {isLoading ? 'Logging in...' : 'Login'}
+                </Button>
+                 <p className="mt-4 text-xs text-center text-muted-foreground">
+                    Use password: <code className="font-mono bg-muted p-1 rounded-sm">password123</code>
+                 </p>
+            </form>
+        </div>
+      </div>
+       <div className="hidden bg-muted lg:flex items-center justify-center flex-col p-8 text-center">
+            <Package className="h-24 w-24 text-primary" />
+            <h2 className="mt-6 text-3xl font-bold">Shepherd Header Admin</h2>
+            <p className="text-muted-foreground mt-2">Manage orders, customers, and deliveries with ease.</p>
+       </div>
     </div>
   );
 }

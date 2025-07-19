@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Package, Newspaper, LogIn, HelpCircle, Contact, Leaf } from 'lucide-react';
 import { Button } from './ui/button';
@@ -12,12 +13,12 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <NextDeliveryBanner />
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+      <div className="container flex h-16 max-w-screen-2xl items-center">
         <Link href="/" className="flex items-center space-x-2 mr-6">
           <Logo />
           <span className="font-bold inline-block font-headline">Shepherd Header</span>
         </Link>
-        <nav className="flex items-center space-x-4 flex-1">
+        <nav className="flex items-center space-x-1 flex-1">
           <Button variant="ghost" asChild>
             <Link href="/boxes">
               <Package className="mr-2 h-4 w-4" />
