@@ -52,8 +52,8 @@ export default function Home() {
       <section className="mt-20">
         <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden shadow-lg">
             <Image
-                src="https://placehold.co/1200x400.png"
-                data-ai-hint="fresh vegetables"
+                src="https://placehold.co/1200x514.png"
+                data-ai-hint="vegetables farm"
                 alt="A vibrant arrangement of fresh vegetables on a rustic wooden table."
                 fill
                 className="object-cover"
