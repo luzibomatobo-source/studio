@@ -9,7 +9,7 @@ export default function BlogPage() {
       <header className="relative w-full h-[40vh] sm:h-[50vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-              src="https://placehold.co/800x600.png"
+              src="https://images.pexels.com/photos/161963/chilis-pepperoni-peppers-spicy-161963.jpeg"
               data-ai-hint="chili basket"
               alt="A person's hand picking a fresh red chili from a woven basket on the grass."
               fill
