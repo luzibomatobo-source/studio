@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carrot, ShoppingBasket } from 'lucide-react';
-import { generateBoxImage } from '@/ai/flows/generate-box-image-flow';
 import { useEffect, useState } from 'react';
 
 const boxOptions = [
@@ -17,7 +16,7 @@ const boxOptions = [
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />,
     imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'farm sunset'
+    aiHint: 'veggies on wood'
   },
   {
     id: 'family',
@@ -26,7 +25,7 @@ const boxOptions = [
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />,
     imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'chili basket'
+    aiHint: 'vegetable harvest'
   },
 ];
 
@@ -34,21 +33,9 @@ function BoxCard({ box }: { box: typeof boxOptions[0] }) {
   const [imageUrl, setImageUrl] = useState<string | null>(box.imageUrl);
 
   useEffect(() => {
-    async function generateImage() {
-        // Only generate image if one isn't provided
-        if (!box.imageUrl) {
-            try {
-                const result = await generateBoxImage({ boxName: box.name, description: box.description });
-                setImageUrl(result.imageUrl);
-            } catch (error) {
-                console.error("Failed to generate image:", error);
-                // Fallback to a placeholder if generation fails
-                setImageUrl('https://placehold.co/600x400.png');
-            }
-        }
-    }
-    generateImage();
-  }, [box.imageUrl, box.name, box.description]);
+    // Forcing placeholder for now as generation is too slow
+    setImageUrl(box.imageUrl);
+  }, [box.imageUrl]);
   
 
   return (
@@ -57,7 +44,7 @@ function BoxCard({ box }: { box: typeof boxOptions[0] }) {
         {box.icon}
         <div>
           <CardTitle className="text-2xl font-bold font-headline">{box.name}</CardTitle>
-          <CardDescription>Starting from ${box.price} per month</CardDescription>
+          <CardDescription>${box.price} per box</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col justify-between p-6 pt-0">
@@ -72,7 +59,7 @@ function BoxCard({ box }: { box: typeof boxOptions[0] }) {
           />
         ) : (
           <div className="rounded-lg bg-muted w-full aspect-video mb-4 flex items-center justify-center">
-            <p className="text-muted-foreground">Generating image...</p>
+            <p className="text-muted-foreground">Loading image...</p>
           </div>
         )}
         <p className="text-muted-foreground">{box.description}</p>
@@ -96,7 +83,7 @@ export default function BoxesPage() {
           Our Veggie Boxes
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
-          Choose the perfect box of seasonal vegetables, straight from our farm to your table.
+          Choose the perfect box of seasonal vegetables, straight from our farm to your table. The total monthly cost, including two deliveries, will be calculated when you place your order.
           <span className="block font-semibold mt-2">Please note: Delivery is currently only available in Bulawayo.</span>
         </p>
       </section>

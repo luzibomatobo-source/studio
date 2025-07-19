@@ -209,7 +209,7 @@ export default function OrderForm() {
                             <FormField control={form.control} name="quantity" render={({ field }) => (
                                 <FormItem><FormLabel className="text-lg font-headline">2. Select Quantity</FormLabel>
                                 <FormControl><QuantityInput value={field.value} onChange={field.onChange} /></FormControl>
-                                <FormDescription>How many box subscriptions you'd like.</FormDescription><FormMessage /></FormItem>
+                                <FormDescription>How many box subscriptions you'd like. Each subscription includes two deliveries per month.</FormDescription><FormMessage /></FormItem>
                             )} />
 
                              <FormField control={form.control} name="paymentMethod" render={({ field }) => (
@@ -231,7 +231,7 @@ export default function OrderForm() {
                             <div className="text-center bg-muted/50 rounded-lg p-6 space-y-2">
                                 <p className="text-lg font-headline">Total Monthly Cost</p>
                                 <p className="text-4xl font-extrabold text-primary">${totalCost.toFixed(2)}</p>
-                                <p className="text-xs text-muted-foreground">1-month subscription, includes two deliveries. You can cancel anytime.</p>
+                                <p className="text-xs text-muted-foreground">Your 1-month subscription includes two deliveries. You can cancel anytime.</p>
                             </div>
 
                             <Button type="submit" size="lg" className="w-full text-lg font-bold bg-accent hover:bg-accent/90">Complete Order</Button>
