@@ -7,35 +7,51 @@ import { Badge } from './ui/badge';
 import type { OrderDetails } from '@/app/order/order-form';
 
 function calculateDeliveryDates() {
+    // Note: CAT is UTC+2. We'll work in UTC to avoid timezone issues with server/client.
+    // 8:00 AM CAT is 6:00 AM UTC.
     const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
+
+    // The reference start date for all delivery calculations (Thursday)
+    const cycleStartDate = new Date(Date.UTC(2025, 6, 31, 0, 0, 0)); // July is month 6 (0-indexed)
+
+    // Calculate the milliseconds for a 2-week cycle
+    const twoWeeksInMillis = 14 * 24 * 60 * 60 * 1000;
+
+    // Find the number of full 2-week cycles that have passed since the start date
+    const elapsedMillis = now.getTime() - cycleStartDate.getTime();
+    let cyclesPassed = Math.ceil(elapsedMillis / twoWeeksInMillis);
+    if (cyclesPassed < 0) cyclesPassed = 0;
+
+
+    // Determine the next upcoming delivery date based on the current date
+    let nextDeliveryDate = new Date(cycleStartDate.getTime() + cyclesPassed * twoWeeksInMillis);
+    
+    // The cut-off is the day before the delivery date at 8:00 AM CAT (6:00 AM UTC)
+    const cutOffDate = new Date(nextDeliveryDate.getTime());
+    cutOffDate.setUTCDate(cutOffDate.getUTCDate() - 1);
+    cutOffDate.setUTCHours(6, 0, 0, 0);
+
     let firstDeliveryDate: Date;
-    let secondDeliveryDate: Date;
 
-    const firstDayOfMonth = new Date(year, month, 1);
-    const fifteenthDayOfMonth = new Date(year, month, 15);
-    const firstDayOfNextMonth = new Date(year, month + 1, 1);
-    const fifteenthDayOfNextMonth = new Date(year, month + 1, 15);
-
-    if (now.getTime() <= firstDayOfMonth.getTime()) {
-        firstDeliveryDate = firstDayOfMonth;
-        secondDeliveryDate = fifteenthDayOfMonth;
-    } else if (now.getTime() > firstDayOfMonth.getTime() && now.getTime() <= fifteenthDayOfMonth.getTime()) {
-        firstDeliveryDate = fifteenthDayOfMonth;
-        secondDeliveryDate = firstDayOfNextMonth;
+    // If the current time is after the cut-off for the 'nextDeliveryDate',
+    // the first delivery will be in the *following* cycle.
+    if (now.getTime() > cutOffDate.getTime()) {
+        firstDeliveryDate = new Date(nextDeliveryDate.getTime() + twoWeeksInMillis);
     } else {
-        firstDeliveryDate = firstDayOfNextMonth;
-        secondDeliveryDate = fifteenthDayOfNextMonth;
+        firstDeliveryDate = nextDeliveryDate;
     }
 
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    // The second delivery is always 2 weeks after the first.
+    const secondDeliveryDate = new Date(firstDeliveryDate.getTime() + twoWeeksInMillis);
+
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' };
 
     return {
         first: firstDeliveryDate.toLocaleDateString('en-ZA', options),
         second: secondDeliveryDate.toLocaleDateString('en-ZA', options),
     };
 }
+
 
 interface OrderConfirmationDialogProps {
   isOpen: boolean;
