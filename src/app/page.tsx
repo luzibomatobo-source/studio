@@ -53,8 +53,8 @@ export default function Home() {
         <div className="relative w-full aspect-[21/9] rounded-lg overflow-hidden shadow-lg">
             <Image
                 src="https://placehold.co/1200x514.png"
-                data-ai-hint="farm sunset"
-                alt="A beautiful sunset over a lush green farm."
+                data-ai-hint="farm sunrise"
+                alt="A beautiful sunrise over a freshly tilled and irrigated farm field."
                 fill
                 className="object-cover"
                 priority
