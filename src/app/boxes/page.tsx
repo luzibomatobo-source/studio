@@ -15,7 +15,7 @@ const boxOptions = [
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />,
     imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'veggies on wood'
+    aiHint: 'fresh produce'
   },
   {
     id: 'family',
@@ -24,7 +24,7 @@ const boxOptions = [
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />,
     imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'vegetable harvest'
+    aiHint: 'vegetable basket'
   },
 ];
 
