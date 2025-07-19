@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
+import TrackingForm from './track-delivery/tracking-form';
 
 const features = [
   {
@@ -62,6 +63,18 @@ export default function Home() {
              </Card>
            ))}
          </div>
+      </section>
+
+      <section className="mt-20 max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-center font-headline text-primary">
+            Track Your Delivery
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+            Enter your phone number and suburb to see the status of your delivery.
+            </p>
+        </div>
+        <TrackingForm />
       </section>
     </div>
   );

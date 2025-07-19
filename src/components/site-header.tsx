@@ -38,12 +38,6 @@ export default function SiteHeader() {
               Our Boxes
             </Link>
           </Button>
-           <Button variant="ghost" asChild>
-            <Link href="/track-delivery">
-              <Truck className="mr-2 h-4 w-4" />
-              Track Delivery
-            </Link>
-          </Button>
           <Button variant="ghost" asChild>
             <Link href="/blog">
               <Newspaper className="mr-2 h-4 w-4" />
