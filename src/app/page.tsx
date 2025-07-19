@@ -8,6 +8,7 @@ import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useGalleryStore } from '@/lib/gallery-store';
+import React from 'react';
 
 const features = [
   {
@@ -28,7 +29,14 @@ const features = [
 ];
 
 export default function Home() {
-  const { images: galleryImages } = useGalleryStore();
+  const { images } = useGalleryStore();
+  
+  // Hydration fix:
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
 
   return (
     <>
@@ -90,7 +98,7 @@ export default function Home() {
                 className="w-full max-w-4xl mx-auto"
                 >
                 <CarouselContent>
-                    {galleryImages.map((image, index) => (
+                    {isMounted && images.map((image, index) => (
                     <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                         <div className="p-1">
                         <Card className="overflow-hidden">

@@ -24,6 +24,12 @@ export default function SettingsPage() {
     const [newImageUrl, setNewImageUrl] = React.useState("");
     const [newImageAlt, setNewImageAlt] = React.useState("");
 
+    // Hydration fix:
+    const [isMounted, setIsMounted] = React.useState(false);
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     const handleAddImage = () => {
         if (!newImageUrl || !newImageAlt) {
             toast({
@@ -159,7 +165,7 @@ export default function SettingsPage() {
                         <div>
                             <Label>Current Gallery Images</Label>
                             <div className="mt-2 space-y-2">
-                                {images.map((image, index) => (
+                                {isMounted && images.map((image, index) => (
                                     <div key={index} className="flex items-center justify-between gap-4 p-2 border rounded-md">
                                         <div className="flex items-center gap-4">
                                             <Image 
@@ -177,6 +183,7 @@ export default function SettingsPage() {
                                         </Button>
                                     </div>
                                 ))}
+                                {!isMounted && <p className="text-sm text-muted-foreground">Loading images...</p>}
                             </div>
                         </div>
                     </CardContent>
