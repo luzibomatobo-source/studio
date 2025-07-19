@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carrot, ShoppingBasket } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 const boxOptions = [
   {
