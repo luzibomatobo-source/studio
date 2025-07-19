@@ -168,11 +168,20 @@ export default function FAQPage() {
         <div className="text-center mt-12">
             <h2 className="text-2xl font-bold font-headline">Still have questions?</h2>
             <p className="mt-2 text-muted-foreground">Our team is here to help. Get in touch with us.</p>
-            <Button asChild className="mt-4 font-bold" size="lg">
-                <Link href="/contact">Contact Us</Link>
-            </Button>
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button asChild className="font-bold" size="lg">
+                    <Link href="/contact">Contact Us</Link>
+                </Button>
+            </div>
+            <div className="mt-6 text-sm text-muted-foreground">
+                <p>Or reach us directly:</p>
+                <p>
+                    <a href="mailto:info@shepherdheader.co.za" className="font-medium text-primary hover:underline">info@shepherdheader.co.za</a>
+                    <span className="mx-2">|</span>
+                    <a href="https://wa.me/27821234567" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">WhatsApp</a>
+                </p>
+            </div>
         </div>
       </div>
     );
   }
-  
