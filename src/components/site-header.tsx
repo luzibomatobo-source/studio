@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Package, Newspaper, LogIn } from 'lucide-react';
+import { Package, Newspaper, LogIn, Truck } from 'lucide-react';
 import { Button } from './ui/button';
 import { ThemeToggle } from './theme-toggle';
 import NextDeliveryBanner from './next-delivery-banner';
@@ -36,6 +36,12 @@ export default function SiteHeader() {
             <Link href="/boxes">
               <Package className="mr-2 h-4 w-4" />
               Our Boxes
+            </Link>
+          </Button>
+           <Button variant="ghost" asChild>
+            <Link href="/track-delivery">
+              <Truck className="mr-2 h-4 w-4" />
+              Track Delivery
             </Link>
           </Button>
           <Button variant="ghost" asChild>
