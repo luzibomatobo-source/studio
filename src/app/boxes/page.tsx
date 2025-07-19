@@ -14,7 +14,7 @@ const boxOptions = [
     price: '8',
     description: 'A curated selection of seasonal essentials, perfect for singles or couples. A great way to eat healthy and local.',
     icon: <ShoppingBasket className="h-8 w-8 text-primary" />,
-    imageUrl: 'https://images.pexels.com/photos/1392276/pexels-photo-1392276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    imageUrl: 'https://placehold.co/600x400.png',
     aiHint: 'fresh produce'
   },
   {
@@ -23,7 +23,7 @@ const boxOptions = [
     price: '15',
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />,
-    imageUrl: 'https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    imageUrl: 'https://placehold.co/600x400.png',
     aiHint: 'vegetable basket'
   },
 ];
