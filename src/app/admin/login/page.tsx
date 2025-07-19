@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
                     <Input
                         id="email"
                         type="email"
-                        placeholder="info@shepherdheader.co.za"
+                        placeholder="admin@example.com"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

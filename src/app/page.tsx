@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
+import { ArrowRight, Leaf, Truck, Heart, Sun } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useGalleryStore } from '@/lib/gallery-store';
@@ -40,9 +40,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-full py-20 md:py-32 flex items-center justify-center text-center">
+      <section className="w-full py-20 md:py-32 flex items-center justify-center text-center bg-background">
         <div className="container px-4">
-            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-extrabold tracking-tight font-headline text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             Fresh, Local, Delivered.
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">

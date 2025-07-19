@@ -66,6 +66,8 @@ const OrderConfirmationDialog: FC<OrderConfirmationDialogProps> = ({ isOpen, onO
   useEffect(() => {
     if (isOpen) {
       setDeliveryDates(calculateDeliveryDates());
+    } else {
+      setDeliveryDates(null);
     }
   }, [isOpen]);
 

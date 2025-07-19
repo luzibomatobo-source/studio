@@ -53,7 +53,6 @@ export default function OrderForm() {
     const { toast } = useToast();
     const searchParams = useSearchParams();
     const [orderNumber, setOrderNumber] = useState("");
-    const [totalCost, setTotalCost] = useState(0);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [confirmedOrderDetails, setConfirmedOrderDetails] = useState<OrderDetails | null>(null);
     
@@ -80,23 +79,20 @@ export default function OrderForm() {
     const quantity = watch("quantity");
     const paymentMethod = watch("paymentMethod");
 
+    const totalCost = useMemo(() => {
+        if (boxSelection && quantity) {
+            const selectedBox = boxOptions.find(box => box.id === boxSelection);
+            if (selectedBox) {
+                return selectedBox.price * quantity * 2;
+            }
+        }
+        return 0;
+    }, [boxSelection, quantity]);
+
     useEffect(() => {
         // Generate a unique order number on component mount
         setOrderNumber(`SH-${Date.now().toString().slice(-6)}`);
     }, []);
-
-    useEffect(() => {
-        if (boxSelection && quantity) {
-            const selectedBox = boxOptions.find(box => box.id === boxSelection);
-            if (selectedBox) {
-                // Total cost is for a one month subscription (twice per month delivery)
-                const cost = selectedBox.price * quantity * 2;
-                setTotalCost(cost);
-            }
-        } else {
-            setTotalCost(0);
-        }
-    }, [boxSelection, quantity]);
 
     // Reset quantity if it violates cash on delivery rule
     useEffect(() => {
