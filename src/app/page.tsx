@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const features = [
   {
@@ -23,6 +24,29 @@ const features = [
     description: "The mix changes with the season – always something fresh to discover.",
   },
 ];
+
+const galleryImages = [
+    {
+        src: "https://images.pexels.com/photos/54340/sun-rose-teanature-flower-54340.jpeg",
+        alt: "A golden sunrise over young plants seen through a protective net.",
+        aiHint: "farm sunrise"
+    },
+    {
+        src: "https://images.pexels.com/photos/265076/pexels-photo-265076.jpeg",
+        alt: "A close-up of water droplets on vibrant green leaves.",
+        aiHint: "fresh leaves"
+    },
+    {
+        src: "https://images.pexels.com/photos/4197483/pexels-photo-4197483.jpeg",
+        alt: "A farmer holding a wooden crate filled with fresh, colorful vegetables.",
+        aiHint: "farmer holding vegetables"
+    },
+    {
+        src: "https://images.pexels.com/photos/235656/pexels-photo-235656.jpeg",
+        alt: "Rows of lush green lettuce growing in a field.",
+        aiHint: "lettuce field"
+    }
+]
 
 
 export default function Home() {
@@ -68,6 +92,48 @@ export default function Home() {
              ))}
            </div>
         </section>
+
+        <section className="mt-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-center font-headline text-primary">
+                From Our Farm
+              </h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                A glimpse into where your food comes from. Fresh, natural, and grown with care.
+              </p>
+            </div>
+             <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                className="w-full max-w-4xl mx-auto"
+                >
+                <CarouselContent>
+                    {galleryImages.map((image, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <div className="p-1">
+                        <Card className="overflow-hidden">
+                            <CardContent className="p-0 flex items-center justify-center">
+                                <Image
+                                    src={image.src}
+                                    alt={image.alt}
+                                    data-ai-hint={image.aiHint}
+                                    width={800}
+                                    height={600}
+                                    className="aspect-[4/3] w-full h-auto object-cover"
+                                />
+                            </CardContent>
+                        </Card>
+                        </div>
+                    </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+            </Carousel>
+        </section>
+
 
         <section id="tracking" className="mt-20 max-w-2xl mx-auto scroll-mt-20">
           <div className="text-center mb-12">
