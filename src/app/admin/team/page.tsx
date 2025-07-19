@@ -1,5 +1,6 @@
 
 "use client"
+import * as React from "react"
 import {
   MoreHorizontal,
   PlusCircle,
@@ -48,16 +49,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useToast } from "@/hooks/use-toast"
 
 
-const mockTeamMembers = [
+const initialTeamMembers = [
     { id: 1, name: "Agent A", email: "agenta@shepherdheader.co.za", role: "Delivery Agent", status: "Active", deliveries: 45, cashOnHand: 75.50 },
     { id: 2, name: "Agent B", email: "agentb@shepherdheader.co.za", role: "Delivery Agent", status: "Active", deliveries: 38, cashOnHand: 50.00 },
     { id: 3, name: "Agent C", email: "agentc@shepherdheader.co.za", role: "Team Leader", status: "Active", deliveries: 50, cashOnHand: 120.00 },
     { id: 4, name: "Agent D", email: "agentd@shepherdheader.co.za", role: "Delivery Agent", status: "Inactive", deliveries: 0, cashOnHand: 0.00 },
 ]
 
+type TeamMemberRole = "Delivery Agent" | "Team Leader" | "Admin";
+
 export default function TeamManagementPage() {
+    const [teamMembers, setTeamMembers] = React.useState(initialTeamMembers);
+    const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+    const [newName, setNewName] = React.useState("");
+    const [newEmail, setNewEmail] = React.useState("");
+    const [newRole, setNewRole] = React.useState<TeamMemberRole | "">("");
+    const { toast } = useToast();
+
+    const handleAddMember = () => {
+        if (!newName || !newEmail || !newRole) {
+            toast({
+                title: "Error",
+                description: "Please fill out all fields.",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        const newMember = {
+            id: teamMembers.length + 1,
+            name: newName,
+            email: newEmail,
+            role: newRole,
+            status: "Active",
+            deliveries: 0,
+            cashOnHand: 0.00,
+        };
+
+        setTeamMembers([...teamMembers, newMember]);
+        
+        toast({
+            title: "Success!",
+            description: `${newName} has been added to the team.`,
+        });
+
+        // Reset form and close dialog
+        setNewName("");
+        setNewEmail("");
+        setNewRole("");
+        setIsDialogOpen(false);
+    };
+
     return (
         <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
             <div className="flex items-center">
@@ -68,7 +113,7 @@ export default function TeamManagementPage() {
                     </p>
                 </div>
                 <div className="ml-auto flex items-center gap-2">
-                    <Dialog>
+                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <Button size="sm" className="h-8 gap-1">
                                 <PlusCircle className="h-3.5 w-3.5" />
@@ -87,28 +132,28 @@ export default function TeamManagementPage() {
                             <div className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="name" className="text-right">Name</Label>
-                                    <Input id="name" placeholder="John Doe" className="col-span-3" />
+                                    <Input id="name" placeholder="John Doe" className="col-span-3" value={newName} onChange={(e) => setNewName(e.target.value)} />
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="email" className="text-right">Email</Label>
-                                    <Input id="email" type="email" placeholder="agent@example.com" className="col-span-3" />
+                                    <Input id="email" type="email" placeholder="agent@example.com" className="col-span-3" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="role" className="text-right">Role</Label>
-                                    <Select>
+                                    <Select onValueChange={(value) => setNewRole(value as TeamMemberRole)}>
                                         <SelectTrigger className="col-span-3">
                                             <SelectValue placeholder="Select a role" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="agent">Delivery Agent</SelectItem>
-                                            <SelectItem value="leader">Team Leader</SelectItem>
-                                            <SelectItem value="admin">Admin</SelectItem>
+                                            <SelectItem value="Delivery Agent">Delivery Agent</SelectItem>
+                                            <SelectItem value="Team Leader">Team Leader</SelectItem>
+                                            <SelectItem value="Admin">Admin</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button type="submit">Add Member</Button>
+                                <Button type="submit" onClick={handleAddMember}>Add Member</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
@@ -136,7 +181,7 @@ export default function TeamManagementPage() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {mockTeamMembers.map((member) => (
+                            {teamMembers.map((member) => (
                                 <TableRow key={member.id}>
                                     <TableCell>
                                         <div className="font-medium">{member.name}</div>
