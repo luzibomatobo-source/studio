@@ -2,18 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Carrot, ShoppingBasket, Leaf, Truck } from 'lucide-react';
+import { ArrowRight, Leaf, Truck, Heart, Box, Sun } from 'lucide-react';
 
 const features = [
   {
-    icon: <Leaf className="h-8 w-8 text-primary" />,
-    title: "Farm-Fresh Quality",
-    description: "We deliver the freshest, seasonal vegetables straight from our fields to your doorstep.",
+    icon: <Heart className="h-8 w-8 text-primary" />,
+    title: "Honest Food",
+    description: "No harmful chemicals – just honest, lovingly grown food.",
   },
   {
     icon: <Truck className="h-8 w-8 text-primary" />,
-    title: "Convenient Delivery",
-    description: "Get healthy, local produce delivered to your home twice a month. It's never been easier to eat well.",
+    title: "Free Delivery",
+    description: "Delivery is on us – no extra charges for our standard delivery areas.",
+  },
+  {
+    icon: <Sun className="h-8 w-8 text-primary" />,
+    title: "Seasonal Mix",
+    description: "The mix changes with the season – always something fresh to discover.",
   },
 ];
 
@@ -43,11 +48,11 @@ export default function Home() {
       </section>
       
       <section className="mt-20">
-         <h2 className="text-3xl font-bold text-center font-headline text-primary">Why Choose Us?</h2>
-         <div className="mt-8 grid gap-8 md:grid-cols-2 lg:gap-12">
+         <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
+         <div className="mt-8 grid gap-8 md:grid-cols-3 lg:gap-12">
            {features.map((feature) => (
-             <Card key={feature.title} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-               <CardHeader className="flex-row items-center gap-4 p-6">
+             <Card key={feature.title} className="shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+               <CardHeader className="flex-col items-center gap-4 p-6">
                  {feature.icon}
                  <CardTitle className="text-2xl font-bold font-headline">{feature.title}</CardTitle>
                </CardHeader>
