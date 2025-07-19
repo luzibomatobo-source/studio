@@ -4,6 +4,7 @@
 import * as React from "react"
 import Link from "next/link"
 import {
+  FileText,
   Home,
   Package,
   PanelLeft,
@@ -73,6 +74,14 @@ export default function AdminLayout({
                 <Link href="/admin/team">
                   <Users2 />
                   <span>Team</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Reports" isActive={isActive('/admin/reports')}>
+                <Link href="/admin/reports">
+                  <FileText />
+                  <span>Reports</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
