@@ -57,6 +57,16 @@ const deliveryPerformance = [
   { agent: "Agent C", delivered: 50, pending: 1 },
 ]
 
+const suburbConcentration = [
+    { suburb: "Hillside", orders: 120 },
+    { suburb: "Burnside", orders: 98 },
+    { suburb: "Suburbs", orders: 86 },
+    { suburb: "Khayelitsha", orders: 75 },
+    { suburb: "Parklands", orders: 60 },
+    { suburb: "CBD", orders: 45 },
+]
+
+
 export default function AdminDashboardPage() {
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -184,41 +194,27 @@ export default function AdminDashboardPage() {
         </Card>
         <Card>
             <CardHeader>
-                <CardTitle>Order Concentration</CardTitle>
-                <CardDescription>
-                    Visual hotspot map of order locations in Bulawayo.
+                <CardTitle>Order Concentration by Suburb</CardTitle>
+                 <CardDescription>
+                    Breakdown of orders by suburb this month.
                 </CardDescription>
             </CardHeader>
-            <CardContent className="relative">
-                <Image
-                    src="https://placehold.co/600x400.png"
-                    data-ai-hint="map Bulawayo"
-                    alt="Map of Bulawayo showing order concentration hotspots."
-                    width={600}
-                    height={400}
-                    className="rounded-lg object-cover w-full h-full"
-                />
-                 <div className="absolute top-1/2 left-1/3 animate-pulse">
-                    <MapPin className="h-8 w-8 text-red-500" />
-                    <span className="relative flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                </div>
-                 <div className="absolute top-1/4 left-2/3 animate-pulse delay-300">
-                    <MapPin className="h-8 w-8 text-red-500" />
-                     <span className="relative flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                </div>
-                  <div className="absolute top-2/3 left-1/2 animate-pulse delay-500">
-                    <MapPin className="h-8 w-8 text-red-500" />
-                     <span className="relative flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                </div>
+            <CardContent>
+                <ResponsiveContainer width="100%" height={350}>
+                    <BarChart data={suburbConcentration}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="suburb" />
+                        <YAxis />
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: "hsl(var(--background))",
+                                border: "1px solid hsl(var(--border))",
+                            }}
+                        />
+                        <Legend />
+                        <Bar dataKey="orders" fill="hsl(var(--primary))" name="Orders" />
+                    </BarChart>
+                </ResponsiveContainer>
             </CardContent>
         </Card>
       </div>
