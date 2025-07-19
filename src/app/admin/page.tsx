@@ -31,7 +31,8 @@ import {
 } from "@/components/ui/table"
 
 import { Badge } from "@/components/ui/badge"
-import { DollarSign, Package, Users } from "lucide-react"
+import { DollarSign, MapPin, Package, Users } from "lucide-react"
+import Image from "next/image"
 
 const monthlyRevenue = [
   { month: "Jan", revenue: 450 },
@@ -154,32 +155,73 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Delivery Agent Performance</CardTitle>
-          <CardDescription>
-            Performance metrics for active delivery agents this week.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={deliveryPerformance}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="agent" />
-              <YAxis />
-              <Tooltip 
-                contentStyle={{
-                  backgroundColor: "hsl(var(--background))",
-                  border: "1px solid hsl(var(--border))",
-                }}
-              />
-              <Legend />
-              <Bar dataKey="delivered" stackId="a" fill="hsl(var(--primary))" name="Delivered"/>
-              <Bar dataKey="pending" stackId="a" fill="hsl(var(--muted))" name="Pending" />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+        <Card>
+            <CardHeader>
+                <CardTitle>Delivery Agent Performance</CardTitle>
+                <CardDescription>
+                    Performance metrics for active delivery agents this week.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <ResponsiveContainer width="100%" height={350}>
+                    <BarChart data={deliveryPerformance}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="agent" />
+                    <YAxis />
+                    <Tooltip 
+                        contentStyle={{
+                        backgroundColor: "hsl(var(--background))",
+                        border: "1px solid hsl(var(--border))",
+                        }}
+                    />
+                    <Legend />
+                    <Bar dataKey="delivered" stackId="a" fill="hsl(var(--primary))" name="Delivered"/>
+                    <Bar dataKey="pending" stackId="a" fill="hsl(var(--muted))" name="Pending" />
+                    </BarChart>
+                </ResponsiveContainer>
+            </CardContent>
+        </Card>
+        <Card>
+            <CardHeader>
+                <CardTitle>Order Concentration</CardTitle>
+                <CardDescription>
+                    Visual hotspot map of order locations in Bulawayo.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="relative">
+                <Image
+                    src="https://placehold.co/600x400.png"
+                    data-ai-hint="map Bulawayo"
+                    alt="Map of Bulawayo showing order concentration hotspots."
+                    width={600}
+                    height={400}
+                    className="rounded-lg object-cover w-full h-full"
+                />
+                 <div className="absolute top-1/2 left-1/3 animate-pulse">
+                    <MapPin className="h-8 w-8 text-red-500" />
+                    <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                </div>
+                 <div className="absolute top-1/4 left-2/3 animate-pulse delay-300">
+                    <MapPin className="h-8 w-8 text-red-500" />
+                     <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                </div>
+                  <div className="absolute top-2/3 left-1/2 animate-pulse delay-500">
+                    <MapPin className="h-8 w-8 text-red-500" />
+                     <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
