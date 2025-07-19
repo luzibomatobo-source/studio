@@ -26,7 +26,7 @@ export default function SiteHeader() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <Link href="/" className="flex items-center space-x-2 mr-6">
           <Logo />
-          <span className="font-bold inline-block font-headline">Shepherd Herder</span>
+          <span className="font-bold inline-block font-headline">Shepherd Header</span>
         </Link>
         <nav className="flex items-center space-x-4">
           <Button variant="ghost" asChild>

@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import SiteHeader from '@/components/site-header';
 
 export const metadata: Metadata = {
-  title: 'Shepherd Herder Veggie Box',
+  title: 'Shepherd Header Veggie Box',
   description: 'Fresh, Local, Delivered.',
 };
 

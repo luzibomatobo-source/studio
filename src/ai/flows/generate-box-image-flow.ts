@@ -48,7 +48,7 @@ const generateBoxImageFlow = ai.defineFlow(
   async input => {
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
-      prompt: `A high-quality, vibrant photograph of a rustic wicker basket filled with fresh, colorful seasonal vegetables, corresponding to the "${input.boxName}". The vegetables should look appealing and farm-fresh. The basket has a small, charming wooden tag attached with the brand "Shepherd Herder" elegantly engraved on it. The background is a clean, bright, out-of-focus rustic kitchen or farm setting, with natural light.`,
+      prompt: `A high-quality, vibrant photograph of a rustic wicker basket filled with fresh, colorful seasonal vegetables, corresponding to the "${input.boxName}". The vegetables should look appealing and farm-fresh. The basket has a small, charming wooden tag attached with the brand "Shepherd Header" elegantly engraved on it. The background is a clean, bright, out-of-focus rustic kitchen or farm setting, with natural light.`,
       config: {
         responseModalities: ['IMAGE'],
       },
