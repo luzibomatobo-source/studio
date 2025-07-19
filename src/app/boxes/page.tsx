@@ -1,9 +1,13 @@
+
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carrot, ShoppingBasket } from 'lucide-react';
 import { generateBoxImage } from '@/ai/flows/generate-box-image-flow';
+import { useEffect, useState } from 'react';
 
 const boxOptions = [
   {
@@ -22,8 +26,21 @@ const boxOptions = [
   },
 ];
 
-async function BoxCard({ box }: { box: typeof boxOptions[0] }) {
-  const { imageUrl } = await generateBoxImage({ boxName: box.name, description: box.description });
+function BoxCard({ box }: { box: typeof boxOptions[0] }) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function generateImage() {
+        try {
+            const result = await generateBoxImage({ boxName: box.name, description: box.description });
+            setImageUrl(result.imageUrl);
+        } catch (error) {
+            console.error("Failed to generate image:", error);
+        }
+    }
+    generateImage();
+  }, [box.name, box.description]);
+  
 
   return (
     <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
