@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 
@@ -144,44 +145,58 @@ const faqs = [
 
 export default function FAQPage() {
     return (
-      <div className="container mx-auto px-4 py-12 sm:py-16 md:py-24 max-w-3xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight font-headline text-primary sm:text-5xl">
-            Frequently Asked Questions
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.
-          </p>
-        </div>
-
-        <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
-                    <AccordionTrigger className="text-left text-lg font-headline">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-base text-muted-foreground">
-                        {faq.answer}
-                    </AccordionContent>
-                </AccordionItem>
-            ))}
-        </Accordion>
-
-        <div className="text-center mt-12">
-            <h2 className="text-2xl font-bold font-headline">Still have questions?</h2>
-            <p className="mt-2 text-muted-foreground">Our team is here to help. Get in touch with us.</p>
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button asChild className="font-bold" size="lg">
-                    <Link href="/contact">Contact Us</Link>
-                </Button>
+      <>
+        <header className="relative w-full h-[40vh] flex items-center justify-center text-center text-white overflow-hidden">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://placehold.co/1200x514.png"
+                    data-ai-hint="farm sunset"
+                    alt="A beautiful sunset over a farm field with irrigation lines."
+                    fill
+                    className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/50" />
             </div>
-            <div className="mt-6 text-sm text-muted-foreground">
-                <p>Or reach us directly:</p>
-                <p>
-                    <a href="mailto:info@shepherdheader.co.za" className="font-medium text-primary hover:underline">info@shepherdheader.co.za</a>
-                    <span className="mx-2">|</span>
-                    <a href="https://wa.me/27821234567" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">WhatsApp</a>
+            <div className="container relative z-10 px-4">
+                <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl">
+                    Frequently Asked Questions
+                </h1>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-white/90 sm:text-xl">
+                    Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.
                 </p>
             </div>
+        </header>
+
+        <div className="container mx-auto px-4 py-12 sm:py-16 md:py-24 max-w-3xl">
+            <Accordion type="single" collapsible className="w-full">
+                {faqs.map((faq, index) => (
+                    <AccordionItem value={`item-${index}`} key={index}>
+                        <AccordionTrigger className="text-left text-lg font-headline">{faq.question}</AccordionTrigger>
+                        <AccordionContent className="text-base text-muted-foreground">
+                            {faq.answer}
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+
+            <div className="text-center mt-12">
+                <h2 className="text-2xl font-bold font-headline">Still have questions?</h2>
+                <p className="mt-2 text-muted-foreground">Our team is here to help. Get in touch with us.</p>
+                <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Button asChild className="font-bold" size="lg">
+                        <Link href="/contact">Contact Us</Link>
+                    </Button>
+                </div>
+                <div className="mt-6 text-sm text-muted-foreground">
+                    <p>Or reach us directly:</p>
+                    <p>
+                        <a href="mailto:info@shepherdheader.co.za" className="font-medium text-primary hover:underline">info@shepherdheader.co.za</a>
+                        <span className="mx-2">|</span>
+                        <a href="https://wa.me/27821234567" target="_blank" rel="noopener noreferrer" className="font-medium text-primary hover:underline">WhatsApp</a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
+      </>
     );
   }
