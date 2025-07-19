@@ -14,6 +14,7 @@ export default function BlogPage() {
               alt="A person's hand picking a fresh red chili from a woven basket on the grass."
               fill
               className="object-cover"
+              priority
           />
           <div className="absolute inset-0 bg-black/50" />
         </div>

@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import Image from 'next/image';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -149,11 +150,12 @@ export default function FAQPage() {
         <header className="relative w-full h-[40vh] flex items-center justify-center text-center text-white overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/placeholder.co/1200x514.png"
+                    src="https://images.pexels.com/photos/54340/sun-rose-teanature-flower-54340.jpeg"
                     data-ai-hint="farm sunrise"
                     alt="A golden sunrise over young plants seen through a protective net."
                     fill
                     className="object-cover"
+                    priority
                 />
                 <div className="absolute inset-0 bg-black/50" />
             </div>

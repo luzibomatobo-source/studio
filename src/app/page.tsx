@@ -31,12 +31,11 @@ export default function Home() {
       <section className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
            <Image
-                src="/placeholder.co/1200x514.png"
-                data-ai-hint="farm sunrise"
-                alt="A golden sunrise over young plants seen through a protective net."
+                src="https://images.pexels.com/photos/128402/pexels-photo-128402.jpeg"
+                data-ai-hint="vegetables harvest"
+                alt="A beautiful harvest of fresh vegetables including carrots, broccoli, and peppers."
                 fill
                 className="object-cover"
-                priority
             />
             <div className="absolute inset-0 bg-black/50" />
         </div>
