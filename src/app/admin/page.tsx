@@ -10,21 +10,37 @@ import { Label } from "@/components/ui/label";
 import { useToast } from '@/hooks/use-toast';
 import { Package } from 'lucide-react';
 
+const SUPER_USER_EMAIL = 'admin@shepherdheader.co.za';
+
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const isSuperUser = email.toLowerCase() === SUPER_USER_EMAIL;
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     // This is a placeholder for real authentication
-    // In a real app, you would make an API call here.
     setTimeout(() => {
-      if (password === 'password123') {
+      let loggedIn = false;
+      if (isSuperUser) {
+        if (password === 'password123') {
+            loggedIn = true;
+        }
+      } else {
+        // For non-super users, just check if a phone number was entered.
+        if (phone.length > 0) {
+            loggedIn = true;
+        }
+      }
+
+      if (loggedIn) {
         toast({
           title: "Login Successful",
           description: "Redirecting to your dashboard...",
@@ -33,7 +49,7 @@ export default function AdminLoginPage() {
       } else {
         toast({
           title: "Login Failed",
-          description: "Please check your password and try again.",
+          description: "Please check your details and try again.",
           variant: "destructive",
         });
         setIsLoading(false);
@@ -48,7 +64,7 @@ export default function AdminLoginPage() {
             <div className="grid gap-2 text-center">
                  <h1 className="text-3xl font-bold">Login</h1>
                  <p className="text-balance text-muted-foreground">
-                    Enter your email below to login to your account
+                    Enter your credentials to access the admin portal.
                 </p>
             </div>
             <form onSubmit={handleLogin} className="grid gap-4">
@@ -63,26 +79,44 @@ export default function AdminLoginPage() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                  </div>
-                 <div className="grid gap-2">
-                     <div className="flex items-center">
-                        <Label htmlFor="password">Password</Label>
-                        <a href="#" className="ml-auto inline-block text-sm underline">
-                            Forgot your password?
-                        </a>
-                     </div>
-                     <Input 
-                        id="password" 
-                        type="password" 
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+                {isSuperUser ? (
+                     <div className="grid gap-2">
+                         <div className="flex items-center">
+                            <Label htmlFor="password">Password</Label>
+                            <a href="#" className="ml-auto inline-block text-sm underline">
+                                Forgot your password?
+                            </a>
+                         </div>
+                         <Input 
+                            id="password" 
+                            type="password" 
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                         <p className="text-xs text-muted-foreground">
+                            Use password: <code className="font-mono bg-muted p-1 rounded-sm">password123</code>
+                         </p>
+                    </div>
+                ) : (
+                    <div className="grid gap-2">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input
+                            id="phone"
+                            type="tel"
+                            placeholder="Enter your phone number"
+                            required
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+                )}
+
                 <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? 'Logging in...' : 'Login'}
                 </Button>
                  <p className="mt-4 text-xs text-center text-muted-foreground">
-                    Use password: <code className="font-mono bg-muted p-1 rounded-sm">password123</code>
+                    Super user email: <code className="font-mono bg-muted p-1 rounded-sm">{SUPER_USER_EMAIL}</code>
                  </p>
             </form>
         </div>
