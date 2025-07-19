@@ -65,7 +65,7 @@ export default function Home() {
          </div>
       </section>
 
-      <section className="mt-20 max-w-2xl mx-auto">
+      <section id="tracking" className="mt-20 max-w-2xl mx-auto scroll-mt-20">
         <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-center font-headline text-primary">
             Track Your Delivery

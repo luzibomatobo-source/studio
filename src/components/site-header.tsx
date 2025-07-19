@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Package, Newspaper, LogIn, Truck, Contact } from 'lucide-react';
+import { Package, Newspaper, LogIn, HelpCircle, Contact } from 'lucide-react';
 import { Button } from './ui/button';
 import { ThemeToggle } from './theme-toggle';
 import NextDeliveryBanner from './next-delivery-banner';
@@ -42,6 +42,12 @@ export default function SiteHeader() {
             <Link href="/blog">
               <Newspaper className="mr-2 h-4 w-4" />
               Blog
+            </Link>
+          </Button>
+           <Button variant="ghost" asChild>
+            <Link href="/faq">
+              <HelpCircle className="mr-2 h-4 w-4" />
+              FAQ
             </Link>
           </Button>
            <Button variant="ghost" asChild>
