@@ -25,8 +25,8 @@ const boxOptions = [
     price: '15',
     description: 'A generous assortment of fresh, seasonal vegetables to feed the whole family. The best value for your money.',
     icon: <Carrot className="h-8 w-8 text-primary" />,
-    imageUrl: null,
-    aiHint: null
+    imageUrl: 'https://placehold.co/600x400.png',
+    aiHint: 'chili basket'
   },
 ];
 
