@@ -3,11 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Heart, Sun, Truck } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const features = [
   {
@@ -63,21 +62,32 @@ const galleryImages = [
 export default function Home() {
   return (
     <>
-      <section className="w-full py-20 md:py-32 flex items-center justify-center text-center bg-background">
-        <div className="container px-4">
-            <h1 className="text-4xl font-extrabold tracking-tight font-headline text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+      <section className="relative w-full h-[60vh] flex items-center justify-center text-center text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.pexels.com/photos/1458916/pexels-photo-1458916.jpeg"
+            alt="A vibrant assortment of fresh vegetables in a box."
+            data-ai-hint="veggie box"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="relative z-10 container px-4">
+            <h1 className="text-4xl font-extrabold tracking-tight font-headline sm:text-5xl md:text-6xl lg:text-7xl">
             Fresh, Local, Delivered.
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground sm:text-xl">
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-white/90 sm:text-xl">
             Discover the best seasonal vegetables, straight from our farm to your table. Healthy eating has never been easier or more delicious.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="font-bold text-lg w-full sm:w-auto">
+            <Button asChild size="lg" className="font-bold text-lg w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Link href="/order">
                 Order Your Box Now <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="font-bold text-lg w-full sm:w-auto">
+            <Button asChild size="lg" variant="outline" className="font-bold text-lg w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
                 <Link href="/boxes">
                 See Our Boxes
                 </Link>
