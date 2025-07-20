@@ -1,4 +1,6 @@
+
 import OrderForm from "./order-form";
+import Image from "next/image";
 
 export default function OrderPage() {
   return (

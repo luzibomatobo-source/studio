@@ -129,6 +129,7 @@ export default function AdminLoginPage() {
                 alt="A vibrant assortment of fresh vegetables."
                 fill
                 className="object-cover"
+                priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8 text-white">

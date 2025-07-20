@@ -6,6 +6,7 @@ import Link from "next/link"
 import {
   FileText,
   Home,
+  Leaf,
   Package,
   Settings,
   Users2,
@@ -25,7 +26,7 @@ import { usePathname } from "next/navigation"
 
 const Logo = () => (
     <div className="flex items-center gap-2">
-        <Package className="size-6 text-primary" />
+        <Leaf className="size-6 text-primary" />
         <span className="text-lg font-semibold">Shepherd Header</span>
     </div>
 )

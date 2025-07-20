@@ -77,6 +77,9 @@ export default function OrdersPage() {
             if (activeTab === "delivered") {
                 return order.status === "Delivered";
             }
+            if (activeTab === "cancelled") {
+                return order.status === "Cancelled";
+            }
             return true;
         });
     }
@@ -103,9 +106,8 @@ export default function OrdersPage() {
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="active">Active</TabsTrigger>
             <TabsTrigger value="paused">Paused</TabsTrigger>
-            <TabsTrigger value="delivered" className="hidden sm:flex">
-              Delivered
-            </TabsTrigger>
+            <TabsTrigger value="delivered">Delivered</TabsTrigger>
+            <TabsTrigger value="cancelled" className="hidden sm:flex">Cancelled</TabsTrigger>
           </TabsList>
           <div className="ml-auto flex items-center gap-2">
             <div className="relative">
@@ -118,11 +120,11 @@ export default function OrdersPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <Button size="sm" variant="outline" className="h-7 gap-1">
+            <Button size="sm" variant="outline" className="h-7 gap-1" disabled>
               <ChevronDown className="h-3.5 w-3.5" />
               <span>Filter</span>
             </Button>
-            <Button size="sm" className="h-7 gap-1">
+            <Button size="sm" className="h-7 gap-1" disabled>
               <PlusCircle className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                 Add Order

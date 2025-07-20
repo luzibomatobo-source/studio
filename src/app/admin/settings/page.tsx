@@ -14,9 +14,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
-import { useGalleryStore } from "@/lib/gallery-store"
-import Image from "next/image"
-import { Trash2, PlusCircle } from "lucide-react"
 
 export default function SettingsPage() {
     const { toast } = useToast();
@@ -44,7 +41,7 @@ export default function SettingsPage() {
                         </div>
                     </CardContent>
                     <CardFooter className="border-t px-6 py-4">
-                        <Button>Save</Button>
+                        <Button disabled>Save</Button>
                     </CardFooter>
                 </Card>
 
@@ -71,7 +68,7 @@ export default function SettingsPage() {
                         </div>
                     </CardContent>
                     <CardFooter className="border-t px-6 py-4">
-                        <Button>Save</Button>
+                        <Button disabled>Save</Button>
                     </CardFooter>
                 </Card>
 
@@ -87,12 +84,12 @@ export default function SettingsPage() {
                             <Label htmlFor="new-admin">Promote User to Admin</Label>
                              <div className="flex gap-2">
                                 <Input id="new-admin" type="email" placeholder="Enter user email to promote" />
-                                <Button variant="secondary">Promote</Button>
+                                <Button variant="secondary" disabled>Promote</Button>
                             </div>
                         </div>
                     </CardContent>
                      <CardFooter className="border-t px-6 py-4">
-                        <Button variant="destructive">Reset All Data</Button>
+                        <Button variant="destructive" disabled>Reset All Data</Button>
                     </CardFooter>
                 </Card>
             </div>
