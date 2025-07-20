@@ -65,9 +65,9 @@ export default function Home() {
       <section className="relative w-full h-[60vh] flex items-center justify-center text-center text-white">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.pexels.com/photos/54340/sun-rose-teanature-flower-54340.jpeg"
-            alt="A sunrise over a horticulture garden."
-            data-ai-hint="garden sunrise"
+            src="https://images.unsplash.com/photo-1752028935873-fd59622f71d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNnx8aW1hZ2UlMjBvZiUyMHZlZ2V0YWJsZXMlMjBqdXN0JTIwYmVmb3JlJTIwY29va2luZyUyMGFuZCUyMGNob3BwaW5nJTIwfGVufDB8fHx8MTc1MzAxNjY2NXww&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="A vibrant spread of fresh vegetables on a wooden cutting board, ready for chopping."
+            data-ai-hint="chopped vegetables"
             fill
             className="object-cover"
             priority
