@@ -14,19 +14,16 @@ const features = [
     icon: <Heart className="h-6 w-6 text-primary" />,
     title: "Honest Food",
     description: "No harmful chemicals – just honest, lovingly grown food.",
-    value: "honest"
   },
   {
     icon: <Truck className="h-6 w-6 text-primary" />,
     title: "Free Delivery",
     description: "Delivery is on us – no extra charges for our standard delivery areas.",
-    value: "delivery"
   },
   {
     icon: <Sun className="h-6 w-6 text-primary" />,
     title: "Seasonal Mix",
     description: "The mix changes with the season – always something fresh to discover.",
-    value: "seasonal"
   },
 ];
 
@@ -91,35 +88,24 @@ export default function Home() {
 
       <div className="container mx-auto px-4 py-12 sm:py-16 md:py-24">
         <section>
-           <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
-            <Tabs defaultValue="honest" className="mt-8 max-w-3xl mx-auto md:grid md:grid-cols-4 md:gap-12">
-                <TabsList className="flex-col h-auto bg-transparent p-0 space-y-2 mb-8 md:mb-0 md:border-r md:pr-4">
-                    {features.map((feature) => (
-                        <TabsTrigger key={feature.value} value={feature.value} className="w-full justify-start text-lg h-auto p-4 data-[state=active]:bg-muted data-[state=active]:shadow-none">
-                            <div className="flex items-center gap-4">
-                                {feature.icon}
-                                <span className="font-headline">{feature.title}</span>
-                            </div>
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
-                <div className="md:col-span-3">
-                    {features.map((feature) => (
-                        <TabsContent key={feature.value} value={feature.value} className="mt-0">
-                           <Card className="shadow-lg">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-4 font-headline text-2xl">
-                                        {feature.icon} {feature.title}
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-lg text-muted-foreground">{feature.description}</p>
-                                </CardContent>
-                           </Card>
-                        </TabsContent>
-                    ))}
-                </div>
-            </Tabs>
+            <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
+            </div>
+            <div className="grid gap-8 md:grid-cols-3">
+                {features.map((feature) => (
+                <Card key={feature.title} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <CardHeader className="items-center">
+                        <div className="bg-primary/10 p-3 rounded-full mb-2">
+                            {feature.icon}
+                        </div>
+                        <CardTitle className="font-headline">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                </Card>
+                ))}
+            </div>
         </section>
 
         <section className="mt-20">
