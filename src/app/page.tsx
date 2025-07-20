@@ -87,7 +87,7 @@ export default function Home() {
                 Order Your Box Now <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="font-bold text-lg w-full sm:w-auto border-white text-white hover:bg-white hover:text-primary">
+            <Button asChild size="lg" className="font-bold text-lg w-full sm:w-auto bg-black/30 text-white border border-white/50 backdrop-blur-sm hover:bg-black/50 hover:border-white">
                 <Link href="/boxes">
                 See Our Boxes
                 </Link>
