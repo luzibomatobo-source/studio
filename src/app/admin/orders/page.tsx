@@ -60,23 +60,44 @@ type Order = typeof mockOrders[0];
 
 export default function OrdersPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [filteredOrders, setFilteredOrders] = React.useState<Order[]>(mockOrders);
+  const [activeTab, setActiveTab] = React.useState("all");
 
-  React.useEffect(() => {
+  const filteredOrders = React.useMemo(() => {
+    let orders = mockOrders;
+    
+    // Filter by tab
+    if (activeTab !== "all") {
+        orders = orders.filter((order) => {
+            if (activeTab === "active") {
+                return ["Confirmed", "Out for Delivery"].includes(order.status);
+            }
+             if (activeTab === "paused") {
+                return order.status === "Paused";
+            }
+            if (activeTab === "delivered") {
+                return order.status === "Delivered";
+            }
+            return true;
+        });
+    }
+
+    // Filter by search query
     const lowercasedQuery = searchQuery.toLowerCase();
-    const results = mockOrders.filter((order) => {
-      const customerMatch = order.customer.toLowerCase().includes(lowercasedQuery);
-      const orderIdMatch = order.orderId.toLowerCase().includes(lowercasedQuery);
-      const phoneMatch = order.phone.includes(searchQuery); // No toLowerCase for phone numbers
-      return customerMatch || orderIdMatch || phoneMatch;
-    });
-    setFilteredOrders(results);
-  }, [searchQuery]);
-  
+    if (lowercasedQuery) {
+        orders = orders.filter((order) => {
+            const customerMatch = order.customer.toLowerCase().includes(lowercasedQuery);
+            const orderIdMatch = order.orderId.toLowerCase().includes(lowercasedQuery);
+            const phoneMatch = order.phone.includes(searchQuery);
+            return customerMatch || orderIdMatch || phoneMatch;
+        });
+    }
+    
+    return orders;
+  }, [searchQuery, activeTab]);
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-      <Tabs defaultValue="all">
+      <Tabs defaultValue="all" onValueChange={setActiveTab}>
         <div className="flex items-center">
           <TabsList>
             <TabsTrigger value="all">All</TabsTrigger>
@@ -109,7 +130,7 @@ export default function OrdersPage() {
             </Button>
           </div>
         </div>
-        <TabsContent value="all">
+        <TabsContent value={activeTab}>
           <Card>
             <CardHeader>
               <CardTitle>Orders</CardTitle>
@@ -183,7 +204,7 @@ export default function OrdersPage() {
                   )) : (
                      <TableRow>
                         <TableCell colSpan={7} className="text-center h-24">
-                            No orders found for "{searchQuery}".
+                            No orders found for your criteria.
                         </TableCell>
                     </TableRow>
                   )}
