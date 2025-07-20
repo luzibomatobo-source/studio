@@ -84,7 +84,7 @@ export default function Home() {
         <section className="mt-20">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-center font-headline text-primary">
-                From Our Farm
+                From Our Farms
               </h2>
               <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
                 A glimpse into where your food comes from. Fresh, natural, and grown with care.
