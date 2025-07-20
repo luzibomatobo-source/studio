@@ -80,11 +80,9 @@ export default function OrderForm() {
     const paymentMethod = watch("paymentMethod");
 
     const totalCost = useMemo(() => {
-        if (boxSelection && quantity) {
-            const selectedBox = boxOptions.find(box => box.id === boxSelection);
-            if (selectedBox) {
-                return selectedBox.price * quantity * 2;
-            }
+        const selectedBox = boxOptions.find(box => box.id === boxSelection);
+        if (selectedBox) {
+            return selectedBox.price * quantity * 2;
         }
         return 0;
     }, [boxSelection, quantity]);
@@ -109,10 +107,12 @@ export default function OrderForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         const selectedBox = boxOptions.find(box => box.id === values.boxSelection);
+        const currentTotalCost = (selectedBox?.price || 0) * values.quantity * 2;
+        
         const orderDetails: OrderDetails = {
             ...values,
             orderNumber,
-            totalCost,
+            totalCost: currentTotalCost,
             boxName: selectedBox?.name || "Veggie Box"
         };
         

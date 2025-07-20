@@ -59,7 +59,6 @@ export const useGalleryStore = create<GalleryState>()(
         {
             name: 'gallery-storage', // name of the item in storage (must be unique)
             storage: createJSONStorage(() => localStorage), // use localStorage
-            skipHydration: true,
         }
     )
 );
