@@ -47,16 +47,33 @@ import {
 } from "@/components/ui/tabs"
 
 const mockOrders = [
-    { orderId: "ORD001", customer: "Liam Johnson", email: "liam@example.com", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00 },
-    { orderId: "ORD002", customer: "Olivia Smith", email: "olivia@example.com", type: "Family Value Box", status: "Out for Delivery", date: "2023-06-24", total: 30.00 },
-    { orderId: "ORD003", customer: "Noah Williams", email: "noah@example.com", type: "Essentials Box", status: "Paused", date: "2023-06-25", total: 16.00 },
-    { orderId: "ORD004", customer: "Emma Brown", email: "emma@example.com", type: "Family Value Box", status: "Delivered", date: "2023-06-26", total: 30.00 },
-    { orderId: "ORD005", customer: "James Jones", email: "james@example.com", type: "Essentials Box", status: "Confirmed", date: "2023-06-27", total: 16.00 },
-    { orderId: "ORD006", customer: "Sophia Garcia", email: "sophia@example.com", type: "Family Value Box", status: "Cancelled", date: "2023-06-28", total: 30.00 },
+    { orderId: "ORD001", customer: "Liam Johnson", email: "liam@example.com", phone: "0821112222", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00 },
+    { orderId: "ORD002", customer: "Olivia Smith", email: "olivia@example.com", phone: "0823334444", type: "Family Value Box", status: "Out for Delivery", date: "2023-06-24", total: 30.00 },
+    { orderId: "ORD003", customer: "Noah Williams", email: "noah@example.com", phone: "0825556666", type: "Essentials Box", status: "Paused", date: "2023-06-25", total: 16.00 },
+    { orderId: "ORD004", customer: "Emma Brown", email: "emma@example.com", phone: "0827778888", type: "Family Value Box", status: "Delivered", date: "2023-06-26", total: 30.00 },
+    { orderId: "ORD005", customer: "James Jones", email: "james@example.com", phone: "0829990000", type: "Essentials Box", status: "Confirmed", date: "2023-06-27", total: 16.00 },
+    { orderId: "ORD006", customer: "Sophia Garcia", email: "sophia@example.com", phone: "0821234567", type: "Family Value Box", status: "Cancelled", date: "2023-06-28", total: 30.00 },
 ];
+
+type Order = typeof mockOrders[0];
 
 
 export default function OrdersPage() {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [filteredOrders, setFilteredOrders] = React.useState<Order[]>(mockOrders);
+
+  React.useEffect(() => {
+    const lowercasedQuery = searchQuery.toLowerCase();
+    const results = mockOrders.filter((order) => {
+      const customerMatch = order.customer.toLowerCase().includes(lowercasedQuery);
+      const orderIdMatch = order.orderId.toLowerCase().includes(lowercasedQuery);
+      const phoneMatch = order.phone.includes(searchQuery); // No toLowerCase for phone numbers
+      return customerMatch || orderIdMatch || phoneMatch;
+    });
+    setFilteredOrders(results);
+  }, [searchQuery]);
+  
+
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <Tabs defaultValue="all">
@@ -74,8 +91,10 @@ export default function OrdersPage() {
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search orders..."
+                placeholder="Search by name, order, phone..."
                 className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
             <Button size="sm" variant="outline" className="h-7 gap-1">
@@ -118,7 +137,7 @@ export default function OrdersPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {mockOrders.map((order) => (
+                  {filteredOrders.length > 0 ? filteredOrders.map((order) => (
                     <TableRow key={order.orderId}>
                       <TableCell className="font-medium">{order.orderId}</TableCell>
                       <TableCell>
@@ -161,13 +180,19 @@ export default function OrdersPage() {
                         </DropdownMenu>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )) : (
+                     <TableRow>
+                        <TableCell colSpan={7} className="text-center h-24">
+                            No orders found for "{searchQuery}".
+                        </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-6</strong> of <strong>6</strong> orders
+                Showing <strong>{filteredOrders.length}</strong> of <strong>{mockOrders.length}</strong> orders
               </div>
               <div className="ml-auto flex items-center gap-2">
                 <Button size="sm" variant="outline" disabled>
