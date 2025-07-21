@@ -3,10 +3,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, Heart, Sun, Truck } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useGalleryStore } from '@/lib/gallery-store';
+import React from 'react';
 
 const features = [
   {
@@ -26,40 +29,20 @@ const features = [
   },
 ];
 
-const galleryImages = [
-    {
-        src: "https://images.pexels.com/photos/54340/sun-rose-teanature-flower-54340.jpeg",
-        alt: "A golden sunrise over young plants seen through a protective net.",
-        aiHint: "farm sunrise"
-    },
-    {
-        src: "https://images.pexels.com/photos/265076/pexels-photo-265076.jpeg",
-        alt: "A close-up of water droplets on vibrant green leaves.",
-        aiHint: "fresh leaves"
-    },
-    {
-        src: "https://images.pexels.com/photos/4197483/pexels-photo-4197483.jpeg",
-        alt: "A farmer holding a wooden crate filled with fresh, colorful vegetables.",
-        aiHint: "farmer holding vegetables"
-    },
-    {
-        src: "https://images.pexels.com/photos/161963/chilis-pepperoni-peppers-spicy-161963.jpeg",
-        alt: "A person's hand picking a fresh red chili from a woven basket on the grass.",
-        aiHint: "chili basket"
-    },
-    {
-        src: "https://images.pexels.com/photos/235656/pexels-photo-235656.jpeg",
-        alt: "Rows of lush green lettuce growing in a field.",
-        aiHint: "lettuce field"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1594056501292-c419c968846f",
-        alt: "Hands gently holding a freshly opened pomegranate, revealing its vibrant red seeds.",
-        aiHint: "pomegranate hands"
-    }
-];
-
 export default function Home() {
+  const { images } = useGalleryStore();
+  
+  // This is needed to ensure the component re-renders with the correct state from localStorage on the client
+  const [isMounted, setIsMounted] = React.useState(false);
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+      // You can return a loading state or null
+      return null;
+  }
+  
   return (
     <>
       <section className="relative w-full h-[60vh] flex items-center justify-center text-center text-white">
@@ -98,24 +81,32 @@ export default function Home() {
 
       <div className="container mx-auto px-4 py-12 sm:py-16 md:py-24">
         <section>
-            <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
-            </div>
-            <div className="grid gap-8 md:grid-cols-3">
-                {features.map((feature) => (
-                <Card key={feature.title} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardHeader className="items-center">
-                        <div className="bg-primary/10 p-3 rounded-full mb-2">
-                            {feature.icon}
-                        </div>
-                        <CardTitle className="font-headline">{feature.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">{feature.description}</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
+          </div>
+          <Tabs defaultValue={features[0].title} orientation="vertical" className="w-full grid grid-cols-1 md:grid-cols-4 gap-8">
+            <TabsList className="w-full h-auto flex-col bg-transparent p-0">
+              {features.map((feature) => (
+                <TabsTrigger key={feature.title} value={feature.title} className="w-full justify-start p-4 text-lg data-[state=active]:bg-primary/10 data-[state=active]:shadow-none data-[state=active]:border-l-4 border-primary">
+                  <div className="flex items-center gap-4">
+                    {feature.icon}
+                    <span className="font-headline">{feature.title}</span>
+                  </div>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <div className="md:col-span-3">
+              {features.map((feature) => (
+                <TabsContent key={feature.title} value={feature.title} className="mt-0">
+                  <Card className="shadow-lg">
+                    <CardContent className="p-10">
+                      <p className="text-lg text-muted-foreground">{feature.description}</p>
                     </CardContent>
-                </Card>
-                ))}
+                  </Card>
+                </TabsContent>
+              ))}
             </div>
+          </Tabs>
         </section>
 
         <section className="mt-20">
@@ -135,7 +126,7 @@ export default function Home() {
                 className="w-full max-w-4xl mx-auto"
                 >
                 <CarouselContent>
-                    {galleryImages.map((image, index) => (
+                    {images.map((image, index) => (
                     <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                         <div className="p-1">
                         <Card className="overflow-hidden">

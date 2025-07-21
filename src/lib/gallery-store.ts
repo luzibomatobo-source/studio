@@ -13,6 +13,7 @@ interface GalleryImage {
 interface GalleryState {
     images: GalleryImage[];
     addImage: (image: GalleryImage) => void;
+    updateImage: (originalSrc: string, newImage: GalleryImage) => void;
     removeImage: (src: string) => void;
 }
 
@@ -54,6 +55,9 @@ export const useGalleryStore = create<GalleryState>()(
         (set) => ({
             images: initialImages,
             addImage: (image) => set((state) => ({ images: [...state.images, image] })),
+            updateImage: (originalSrc, newImage) => set((state) => ({
+                images: state.images.map((img) => (img.src === originalSrc ? newImage : img)),
+            })),
             removeImage: (src) => set((state) => ({ images: state.images.filter((img) => img.src !== src) })),
         }),
         {

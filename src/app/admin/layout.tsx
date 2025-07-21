@@ -6,6 +6,7 @@ import Link from "next/link"
 import {
   FileText,
   Home,
+  Image,
   Leaf,
   Package,
   Settings,
@@ -68,6 +69,14 @@ export default function AdminLayout({
                 <Link href="/admin/orders">
                   <Package />
                   <span>Orders</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Media" isActive={isActive('/admin/media')}>
+                <Link href="/admin/media">
+                  <Image />
+                  <span>Media</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
