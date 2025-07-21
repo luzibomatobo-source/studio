@@ -9,6 +9,9 @@ import {
   MoreHorizontal,
   PlusCircle,
   Search,
+  Truck,
+  CheckCircle,
+  CreditCard
 } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -23,12 +26,14 @@ import {
 } from "@/components/ui/card"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import {
@@ -45,22 +50,41 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { useToast } from "@/hooks/use-toast"
+import { handleStatusUpdate } from "./actions"
 
 const mockOrders = [
-    { orderId: "ORD001", customer: "Buhlebenkosi Moyo", email: "liam@example.com", phone: "0821112222", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00 },
-    { orderId: "ORD002", customer: "Olivia Smith", email: "olivia@example.com", phone: "0823334444", type: "Family Value Box", status: "Out for Delivery", date: "2023-06-24", total: 30.00 },
-    { orderId: "ORD003", customer: "Noah Williams", email: "noah@example.com", phone: "0825556666", type: "Essentials Box", status: "Paused", date: "2023-06-25", total: 16.00 },
-    { orderId: "ORD004", customer: "Emma Brown", email: "emma@example.com", phone: "0827778888", type: "Family Value Box", status: "Delivered", date: "2023-06-26", total: 30.00 },
-    { orderId: "ORD005", customer: "James Jones", email: "james@example.com", phone: "0829990000", type: "Essentials Box", status: "Confirmed", date: "2023-06-27", total: 16.00 },
-    { orderId: "ORD006", customer: "Sophia Garcia", email: "sophia@example.com", phone: "0821234567", type: "Family Value Box", status: "Cancelled", date: "2023-06-28", total: 30.00 },
+    { orderId: "ORD001", customer: "Buhlebenkosi Moyo", email: "buhle@example.com", phone: "0821112222", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00, paymentStatus: "Paid" },
+    { orderId: "ORD002", customer: "Olivia Smith", email: "olivia@example.com", phone: "0823334444", type: "Family Value Box", status: "Out for Delivery", date: "2023-06-24", total: 30.00, paymentStatus: "Pending" },
+    { orderId: "ORD003", customer: "Noah Williams", email: "noah@example.com", phone: "0825556666", type: "Essentials Box", status: "Paused", date: "2023-06-25", total: 16.00, paymentStatus: "Pending" },
+    { orderId: "ORD004", customer: "Emma Brown", email: "emma@example.com", phone: "0827778888", type: "Family Value Box", status: "Delivered", date: "2023-06-26", total: 30.00, paymentStatus: "Paid" },
+    { orderId: "ORD005", customer: "James Jones", email: "james@example.com", phone: "0829990000", type: "Essentials Box", status: "Confirmed", date: "2023-06-27", total: 16.00, paymentStatus: "Pending" },
+    { orderId: "ORD006", customer: "Sophia Garcia", email: "sophia@example.com", phone: "0821234567", type: "Family Value Box", status: "Cancelled", date: "2023-06-28", total: 30.00, paymentStatus: "Refunded" },
 ];
 
 type Order = typeof mockOrders[0];
 
-
 export default function OrdersPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [activeTab, setActiveTab] = React.useState("all");
+  const { toast } = useToast();
+
+  const handleStatusChange = async (order: Order, newStatus: string) => {
+    toast({ title: "Sending Update...", description: `Notifying ${order.customer} about the change.` });
+    const result = await handleStatusUpdate({
+        customerName: order.customer,
+        customerEmail: order.email,
+        orderId: order.orderId,
+        newStatus: newStatus,
+    });
+
+    if (result.success) {
+        toast({ title: "Email Sent!", description: `Customer has been notified that their order is ${newStatus}.` });
+        // Here you would also update the state of your orders
+    } else {
+        toast({ title: "Email Failed", description: result.message, variant: "destructive" });
+    }
+  }
 
   const filteredOrders = React.useMemo(() => {
     let orders = mockOrders;
@@ -146,10 +170,8 @@ export default function OrdersPage() {
                   <TableRow>
                     <TableHead>Order</TableHead>
                     <TableHead>Customer</TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Type
-                    </TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead>Payment</TableHead>
                     <TableHead className="hidden md:table-cell">
                       Date
                     </TableHead>
@@ -169,13 +191,17 @@ export default function OrdersPage() {
                           {order.email}
                         </div>
                       </TableCell>
-                       <TableCell className="hidden md:table-cell">{order.type}</TableCell>
                       <TableCell>
                         <Badge variant={
                             order.status === "Delivered" ? "default" :
                             order.status === "Out for Delivery" ? "secondary" :
                             order.status === "Paused" || order.status === "Cancelled" ? "destructive" : "outline"
                         }>{order.status}</Badge>
+                      </TableCell>
+                       <TableCell>
+                        <Badge variant={order.paymentStatus === 'Paid' ? 'default' : 'secondary'}>
+                            {order.paymentStatus}
+                        </Badge>
                       </TableCell>
                       <TableCell className="hidden md:table-cell">{order.date}</TableCell>
                       <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
@@ -194,7 +220,28 @@ export default function OrdersPage() {
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Pause</DropdownMenuItem>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>Notify Customer</DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuItem onClick={() => handleStatusChange(order, 'Out for Delivery')}>
+                                        <Truck className="mr-2 h-4 w-4" />
+                                        <span>Out for Delivery</span>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => handleStatusChange(order, 'Delivered')}>
+                                        <CheckCircle className="mr-2 h-4 w-4" />
+                                        <span>Delivered</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
+                             <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>Payment</DropdownMenuSubTrigger>
+                                <DropdownMenuSubContent>
+                                    <DropdownMenuItem onClick={() => handleStatusChange(order, 'Paid')}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        <span>Mark as Paid</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuSubContent>
+                            </DropdownMenuSub>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="text-destructive">
                               Delete

@@ -16,6 +16,7 @@ import OrderConfirmationDialog from "@/components/order-confirmation-dialog";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 
 const boxOptions = [
   { id: 'essentials', name: 'Essentials Box', price: 8 },
@@ -105,7 +106,7 @@ export default function OrderForm() {
     }, [paymentMethod, quantity, setValue, toast]);
 
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         const selectedBox = boxOptions.find(box => box.id === values.boxSelection);
         const currentTotalCost = (selectedBox?.price || 0) * values.quantity * 2;
         
@@ -117,6 +118,9 @@ export default function OrderForm() {
         };
         
         setConfirmedOrderDetails(orderDetails);
+
+        // Send confirmation email
+        await sendOrderConfirmationEmail(orderDetails);
 
         if (values.paymentMethod === 'card') {
             window.open('https://payf.st/4oz80', '_blank');
