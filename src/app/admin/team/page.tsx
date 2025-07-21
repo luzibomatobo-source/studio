@@ -132,7 +132,7 @@ export default function TeamManagementPage() {
                             <div className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="name" className="text-right">Name</Label>
-                                    <Input id="name" placeholder="John Doe" className="col-span-3" value={newName} onChange={(e) => setNewName(e.target.value)} />
+                                    <Input id="name" placeholder="Buhlebenkosi Moyo" className="col-span-3" value={newName} onChange={(e) => setNewName(e.target.value)} />
                                 </div>
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="email" className="text-right">Email</Label>

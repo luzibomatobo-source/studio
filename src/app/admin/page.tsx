@@ -44,7 +44,7 @@ const monthlyRevenue = [
 ]
 
 const recentOrders = [
-  { id: "SH-123456", customer: "John Doe", status: "Delivered", amount: 16.00 },
+  { id: "SH-123456", customer: "Buhlebenkosi Moyo", status: "Delivered", amount: 16.00 },
   { id: "SH-123457", customer: "Jane Smith", status: "Out for Delivery", amount: 30.00 },
   { id: "SH-123458", customer: "Bob Johnson", status: "Confirmed", amount: 8.00 },
   { id: "SH-123459", customer: "Alice Williams", status: "Delivered", amount: 16.00 },

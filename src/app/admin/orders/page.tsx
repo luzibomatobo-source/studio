@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/tabs"
 
 const mockOrders = [
-    { orderId: "ORD001", customer: "Liam Johnson", email: "liam@example.com", phone: "0821112222", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00 },
+    { orderId: "ORD001", customer: "Buhlebenkosi Moyo", email: "liam@example.com", phone: "0821112222", type: "Essentials Box", status: "Delivered", date: "2023-06-23", total: 16.00 },
     { orderId: "ORD002", customer: "Olivia Smith", email: "olivia@example.com", phone: "0823334444", type: "Family Value Box", status: "Out for Delivery", date: "2023-06-24", total: 30.00 },
     { orderId: "ORD003", customer: "Noah Williams", email: "noah@example.com", phone: "0825556666", type: "Essentials Box", status: "Paused", date: "2023-06-25", total: 16.00 },
     { orderId: "ORD004", customer: "Emma Brown", email: "emma@example.com", phone: "0827778888", type: "Family Value Box", status: "Delivered", date: "2023-06-26", total: 30.00 },
