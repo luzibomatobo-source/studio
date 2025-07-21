@@ -3,27 +3,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Heart, Sun, Truck } from 'lucide-react';
 import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGalleryStore } from '@/lib/gallery-store';
 import React from 'react';
 
 const features = [
   {
-    icon: <Heart className="h-6 w-6 text-primary" />,
+    icon: <Heart className="h-8 w-8 text-primary" />,
     title: "Honest Food",
     description: "No harmful chemicals – just honest, lovingly grown food.",
   },
   {
-    icon: <Truck className="h-6 w-6 text-primary" />,
+    icon: <Truck className="h-8 w-8 text-primary" />,
     title: "Free Delivery",
     description: "Delivery is on us – no extra charges for our standard delivery areas.",
   },
   {
-    icon: <Sun className="h-6 w-6 text-primary" />,
+    icon: <Sun className="h-8 w-8 text-primary" />,
     title: "Seasonal Mix",
     description: "The mix changes with the season – always something fresh to discover.",
   },
@@ -84,29 +83,19 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-center font-headline text-primary">What Makes Us Different</h2>
           </div>
-          <Tabs defaultValue={features[0].title} orientation="vertical" className="w-full grid grid-cols-1 md:grid-cols-4 gap-8">
-            <TabsList className="w-full h-auto flex-col bg-transparent p-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature) => (
-                <TabsTrigger key={feature.title} value={feature.title} className="w-full justify-start p-4 text-lg data-[state=active]:bg-primary/10 data-[state=active]:shadow-none data-[state=active]:border-l-4 border-primary">
-                  <div className="flex items-center gap-4">
-                    {feature.icon}
-                    <span className="font-headline">{feature.title}</span>
-                  </div>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            <div className="md:col-span-3">
-              {features.map((feature) => (
-                <TabsContent key={feature.title} value={feature.title} className="mt-0">
-                  <Card className="shadow-lg">
-                    <CardContent className="p-10">
-                      <p className="text-lg text-muted-foreground">{feature.description}</p>
+                <Card key={feature.title} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <CardHeader className="items-center">
+                        {feature.icon}
+                        <CardTitle className="font-headline pt-2">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">{feature.description}</p>
                     </CardContent>
-                  </Card>
-                </TabsContent>
+                </Card>
               ))}
-            </div>
-          </Tabs>
+          </div>
         </section>
 
         <section className="mt-20">
