@@ -9,6 +9,7 @@ import TrackingForm from './track-delivery/tracking-form';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useGalleryStore } from '@/lib/gallery-store';
 import React from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const features = [
   {
@@ -28,20 +29,67 @@ const features = [
   },
 ];
 
-export default function Home() {
-  const { images } = useGalleryStore();
-  
-  // This is needed to ensure the component re-renders with the correct state from localStorage on the client
-  const [isMounted, setIsMounted] = React.useState(false);
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+function GallerySection() {
+    const { images } = useGalleryStore();
+    const [isMounted, setIsMounted] = React.useState(false);
 
-  if (!isMounted) {
-      // You can return a loading state or null
-      return null;
-  }
-  
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted) {
+        return (
+             <div className="w-full max-w-4xl mx-auto">
+                <div className="flex justify-center space-x-4">
+                    {[...Array(3)].map((_, index) => (
+                         <div key={index} className="p-1 w-1/3">
+                            <Card>
+                                <CardContent className="p-0 flex items-center justify-center">
+                                    <Skeleton className="aspect-[4/3] w-full h-auto" />
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+    
+    return (
+        <Carousel
+            opts={{
+                align: "start",
+                loop: true,
+            }}
+            className="w-full max-w-4xl mx-auto"
+            >
+            <CarouselContent>
+                {images.map((image, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                    <Card className="overflow-hidden">
+                        <CardContent className="p-0 flex items-center justify-center">
+                            <Image
+                                src={image.src}
+                                alt={image.alt}
+                                data-ai-hint={image.aiHint}
+                                width={800}
+                                height={600}
+                                className="aspect-[4/3] w-full h-auto object-cover"
+                            />
+                        </CardContent>
+                    </Card>
+                    </div>
+                </CarouselItem>
+                ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+        </Carousel>
+    );
+}
+
+export default function Home() {
   return (
     <>
       <section className="relative w-full h-[60vh] flex items-center justify-center text-center text-white">
@@ -107,36 +155,7 @@ export default function Home() {
                 A glimpse into where your food comes from. Fresh, natural, and grown with care.
               </p>
             </div>
-             <Carousel
-                opts={{
-                    align: "start",
-                    loop: true,
-                }}
-                className="w-full max-w-4xl mx-auto"
-                >
-                <CarouselContent>
-                    {images.map((image, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                        <div className="p-1">
-                        <Card className="overflow-hidden">
-                            <CardContent className="p-0 flex items-center justify-center">
-                                <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    data-ai-hint={image.aiHint}
-                                    width={800}
-                                    height={600}
-                                    className="aspect-[4/3] w-full h-auto object-cover"
-                                />
-                            </CardContent>
-                        </Card>
-                        </div>
-                    </CarouselItem>
-                    ))}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
+            <GallerySection />
         </section>
 
 

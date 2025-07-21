@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Trash2, PlusCircle, Save } from 'lucide-react';
 import Image from 'next/image';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface GalleryImage {
     src: string;
@@ -66,10 +67,42 @@ function EditImageCard({ image }: { image: GalleryImage }) {
     );
 }
 
+function GallerySkeleton() {
+    return (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(3)].map((_, index) => (
+                <Card key={index}>
+                    <CardContent className="p-4">
+                        <Skeleton className="aspect-video w-full mb-4 rounded-md" />
+                        <div className="space-y-4">
+                            <Skeleton className="h-4 w-20" />
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-4 w-20" />
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-4 w-20" />
+                            <Skeleton className="h-10 w-full" />
+                        </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between p-4">
+                        <Skeleton className="h-9 w-24" />
+                        <Skeleton className="h-9 w-20" />
+                    </CardFooter>
+                </Card>
+            ))}
+        </div>
+    );
+}
+
+
 export default function MediaPage() {
     const { images, addImage } = useGalleryStore();
     const { toast } = useToast();
     const [newImage, setNewImage] = React.useState({ src: '', alt: '', aiHint: '' });
+    const [isMounted, setIsMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const handleAddImage = () => {
         if (!newImage.src || !newImage.alt || !newImage.aiHint) {
@@ -80,16 +113,6 @@ export default function MediaPage() {
         setNewImage({ src: '', alt: '', aiHint: '' });
         toast({ title: 'Image Added', description: 'The new image has been added to the gallery.' });
     };
-
-    // This is needed to ensure the component re-renders with the correct state from localStorage
-    const [isMounted, setIsMounted] = React.useState(false);
-    React.useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-        return null;
-    }
 
     return (
         <div className="flex-1 space-y-6 p-4 md:p-8 pt-6">
@@ -124,11 +147,21 @@ export default function MediaPage() {
                 </CardFooter>
             </Card>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {images.map((image) => (
-                    <EditImageCard key={image.src} image={image} />
-                ))}
-            </div>
+            {!isMounted ? (
+                <GallerySkeleton />
+            ) : images.length > 0 ? (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {images.map((image) => (
+                        <EditImageCard key={image.src} image={image} />
+                    ))}
+                </div>
+            ) : (
+                <Card>
+                    <CardContent className="p-6 text-center text-muted-foreground">
+                        No images in the gallery. Add one using the form above.
+                    </CardContent>
+                </Card>
+            )}
         </div>
     );
 }
